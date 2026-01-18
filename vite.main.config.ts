@@ -9,6 +9,7 @@ export default defineConfig((env) => {
   const define = getBuildDefine(forgeEnv);
   const config: UserConfig = {
     build: {
+      sourcemap: true, // 调试，必须开启
       lib: {
         entry: forgeConfigSelf.entry!,
         fileName: () => '[name].js',

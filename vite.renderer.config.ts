@@ -17,11 +17,12 @@ export default defineConfig((env) => {
     mode,
     base: './',
     build: {
+      sourcemap: true, // 调试，必须开启
       outDir: `.vite/renderer/${name}`,
     },
     plugins: [
       pluginExposeRenderer(name),
-      vue(),
+      vue({}),
       AutoImport({
         resolvers: [ElementPlusResolver()],
       }),

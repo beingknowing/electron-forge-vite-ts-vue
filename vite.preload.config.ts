@@ -8,6 +8,7 @@ export default defineConfig((env) => {
   const { forgeConfigSelf } = forgeEnv;
   const config: UserConfig = {
     build: {
+      sourcemap: true, // 调试，必须开启
       rollupOptions: {
         external,
         // Preload scripts may contain Web assets, so use the `build.rollupOptions.input` instead `build.lib.entry`.

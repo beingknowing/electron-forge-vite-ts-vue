@@ -11,7 +11,7 @@ if (require('electron-squirrel-startup')) {
 
 const createWindow = () => {
   startServer()
-
+ 
   // Create the browser window.
   const mainWindow = new BrowserWindow({
     opacity: 1,
@@ -29,10 +29,12 @@ const createWindow = () => {
   });
   mainWindow.webContents.openDevTools();
   // and load the index.html of the app.
+
   if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
   } else {
     mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
+    
   }
 
   // have no visual flash (2)
@@ -55,7 +57,9 @@ const createWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
-  console.log('app ready');
+  console.log('app ready 2');
+  console.log("🚀 ~ createWindow ~ MAIN_WINDOW_VITE_DEV_SERVER_URL:", MAIN_WINDOW_VITE_DEV_SERVER_URL)
+  console.log("🚀 ~ createWindow ~ MAIN_WINDOW_VITE_NAME:", MAIN_WINDOW_VITE_NAME)
   createWindow();
 });
 
