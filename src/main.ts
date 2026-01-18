@@ -57,7 +57,7 @@ const createWindow = () => {
 // initialization and is ready to create browser windows.
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
-  console.log(`app ready ${new Date().toLocaleDateString()}`);
+  console.log(`app ready ${new Date().toLocaleString()} 44`);
   console.log("🚀 ~ createWindow ~ MAIN_WINDOW_VITE_DEV_SERVER_URL:", MAIN_WINDOW_VITE_DEV_SERVER_URL)
   console.log("🚀 ~ createWindow ~ MAIN_WINDOW_VITE_NAME:", MAIN_WINDOW_VITE_NAME)
   createWindow();
