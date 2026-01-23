@@ -18,7 +18,7 @@ export default defineConfig((env) => {
     base: './',
     build: {
       sourcemap: "inline", // 调试，必须开启
-      outDir: `.vite/renderer/${name}`,
+      outDir: `.vite/renderer`,
     },
     plugins: [
       pluginExposeRenderer(name),
