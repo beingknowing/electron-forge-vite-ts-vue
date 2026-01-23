@@ -8,12 +8,7 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts,.tsx .",
-    "typeorm": "typeorm-ts-node-commonjs",
-    "migration:run": "typeorm-ts-node-commonjs migration:run -d ./src/data-source.ts",
-    "migration:revert": "typeorm-ts-node-commonjs migration:revert -d ./src/data-source.ts",
-    "migration:show": "typeorm-ts-node-commonjs migration:show -d ./src/data-source.ts"
+    "publish": "electron-forge publish"
   },
   "devDependencies": {
     "@electron-forge/cli": "^7.11.1",
@@ -46,15 +41,16 @@
   },
   "license": "MIT",
   "dependencies": {
+    "@electron-toolkit/preload": "^3.0.2",
+    "@electron-toolkit/utils": "^4.0.0",
     "axios": "^1.13.2",
     "cron": "^4.4.0",
     "electron-squirrel-startup": "^1.0.1",
     "element-plus": "^2.13.1",
     "express": "^5.2.1",
     "multer": "^2.0.2",
+    "qs": "^6.14.1",
     "reflect-metadata": "^0.2.2",
-    "sqlite3": "^5.1.7",
-    "typeorm": "^0.3.28",
     "vue": "^3.5.26"
   }
 }

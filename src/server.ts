@@ -1,8 +1,7 @@
 import express, { Request, Response } from 'express'
 import * as path from "path"
 import * as bodyParser from "body-parser"
-// import { AppDataSource } from './data-source'
-import { User } from './entity/User'
+
 import multer from 'multer'
 import { CronJob } from 'cron'
 
