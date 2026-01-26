@@ -1,20 +1,8 @@
 {
-  "exclude": [
-    "**/node_modules", // 第三方依赖，不需要编译
-    "**/dist", // 编译输出目录
-    "**/build", // 构建输出目录
-    "coverage", // 测试覆盖率报告
-    ".vscode", // VS Code 配置文件夹
-    ".idea", // JetBrains IDE 配置文件夹
-    "**/*.spec.ts", // 单元测试文件（如果不需要编译）
-    "**/__tests__", // 测试文件夹
-    "**/.git"
-  ],
   "compilerOptions": {
     "strict": true,
     "forceConsistentCasingInFileNames": true
   },
-  "files": [],
   "references": [
     {
       "path": "./tsconfig.node.json"

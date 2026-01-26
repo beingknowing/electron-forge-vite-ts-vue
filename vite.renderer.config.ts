@@ -1,11 +1,11 @@
 import type { ConfigEnv, UserConfig } from 'vite';
 import { defineConfig } from 'vite';
-import { pluginExposeRenderer } from './vite.base.config';
+import { pluginExposeRenderer, external } from './vite.base.config';
 import vue from '@vitejs/plugin-vue';
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
-
+import { join, resolve } from "node:path"
 // https://vitejs.dev/config
 export default defineConfig((env) => {
   const forgeEnv = env as ConfigEnv<'renderer'>;
@@ -15,10 +15,26 @@ export default defineConfig((env) => {
   return {
     root,
     mode,
-    base: './',
+    base: './src/renderer/',
     build: {
       sourcemap: "inline", // 调试，必须开启
       outDir: `.vite/renderer`,
+      rollupOptions: {
+
+        input: {
+          [name]: resolve(__dirname, `${name}.html`),
+        },
+        external: ['electron', 'fs', 'path'],
+        // output: {
+        //   format: 'cjs',
+        //   // It should not be split chunks.
+        //   inlineDynamicImports: true,
+        //   entryFileNames: `[name].js`,
+        //   chunkFileNames: `[name].js`,
+        //   assetFileNames: `[name].[ext]`,
+
+        // },
+      }
     },
     plugins: [
       pluginExposeRenderer(name),

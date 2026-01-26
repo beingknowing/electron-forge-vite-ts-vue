@@ -1,5 +1,5 @@
 import "reflect-metadata"
-import { app, BrowserWindow, screen, powerMonitor } from 'electron';
+import { app, BrowserWindow, powerMonitor } from 'electron';
 import path from 'path';
 import { startServer } from './server';
 
@@ -29,11 +29,13 @@ const createWindow = () => {
   });
   mainWindow.webContents.openDevTools();
   // and load the index.html of the app.
-
-  if (MAIN_WINDOW_VITE_DEV_SERVER_URL) {
-    mainWindow.loadURL(MAIN_WINDOW_VITE_DEV_SERVER_URL);
+  console.log("🚀 ~ createWindow ~ INDEX_VITE_NAME:", INDEX_VITE_NAME)
+  if (INDEX_VITE_DEV_SERVER_URL) {
+    mainWindow.loadURL(INDEX_VITE_DEV_SERVER_URL);
   } else {
-    mainWindow.loadFile(path.join(__dirname, `../renderer/${MAIN_WINDOW_VITE_NAME}/index.html`));
+
+    mainWindow.loadFile(path.join(__dirname, `../renderer/src/renderer/index.html`));
+
 
   }
 
@@ -58,8 +60,8 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
   console.log(`app ready ${new Date().toLocaleString()} 44`);
-  console.log("🚀 ~ createWindow ~ MAIN_WINDOW_VITE_DEV_SERVER_URL:", MAIN_WINDOW_VITE_DEV_SERVER_URL)
-  console.log("🚀 ~ createWindow ~ MAIN_WINDOW_VITE_NAME:", MAIN_WINDOW_VITE_NAME)
+  console.log("🚀 ~ createWindow ~ INDEX_VITE_DEV_SERVER_URL:", INDEX_VITE_DEV_SERVER_URL)
+  console.log("🚀 ~ createWindow ~ INDEX_VITE_NAME:", INDEX_VITE_NAME)
   createWindow();
 });
 
@@ -84,7 +86,7 @@ app.on('activate', () => {
 
 // ============================ //
 // study
-app.on('before-quit', e => {
+app.on('before-quit', (_e) => {
   console.log('app before-quit');
 });
 

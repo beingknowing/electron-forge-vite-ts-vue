@@ -26,9 +26,9 @@
  * ```
  */
 
-import './index.css';
+import './assets/index.css';
 import { createApp } from 'vue';
-import App from './renderer/App.vue';
+import App from './components/App.vue';
 import ElementPlus from 'element-plus'
 
 const app = createApp(App)

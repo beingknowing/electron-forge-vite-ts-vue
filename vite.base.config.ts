@@ -7,7 +7,7 @@ export const builtins = ['electron', ...builtinModules.map((m) => [m, `node:${m}
 
 export const external = [...builtins, ...Object.keys('dependencies' in pkg ? (pkg.dependencies as Record<string, unknown>) : {})];
 
-export function getBuildConfig(env: ConfigEnv): UserConfig {
+export function getBuildConfig(env: ConfigEnv<'build'>): UserConfig {
   const { root, mode, command } = env;
 
   return {
@@ -17,7 +17,7 @@ export function getBuildConfig(env: ConfigEnv): UserConfig {
       // Prevent multiple builds from interfering with each other.
       emptyOutDir: false,
       // 🚧 Multiple builds may conflict.
-      // outDir: '.vite/build',
+      outDir: '.vite/build',
       watch: command === 'serve' ? {} : null,
       minify: command === 'build',
     },
@@ -39,7 +39,7 @@ export function getDefineKeys(names: string[]) {
   }, define);
 }
 
-export function getBuildDefine(env: ConfigEnv) {
+export function getBuildDefine(env: ConfigEnv<'build'>) {
   const { command, forgeConfig } = env;
   const names = forgeConfig.renderer.filter(({ name }) => name != null).map(({ name }) => name!);
   const defineKeys = getDefineKeys(names);
