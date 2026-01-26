@@ -9,7 +9,7 @@ export default defineConfig((env) => {
   const define = getBuildDefine(forgeEnv);
   const config: UserConfig = {
     build: {
-      outDir: '.vite/build/main',
+      outDir: '.vite/build/',
       sourcemap: 'inline',
       lib: {
         entry: forgeConfigSelf.entry!,

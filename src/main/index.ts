@@ -1,5 +1,5 @@
 import "reflect-metadata"
-import { app, BrowserWindow, powerMonitor } from 'electron';
+import { app, BrowserWindow, ipcMain, powerMonitor } from 'electron';
 import path from 'path';
 import { startServer } from './server';
 
@@ -21,7 +21,7 @@ const createWindow = () => {
     resizable: true,
     autoHideMenuBar: true,
     webPreferences: {
-      preload: path.join(__dirname, 'preload.js'),
+      preload: path.join(__dirname, 'preload','index.js'),
     },
     // have no visual flash (1)
     show: true,
@@ -98,5 +98,11 @@ app.on('browser-window-focus', () => {
   console.log('app browser-window-focus');
 });
 
+app.whenReady().then(_v => {
+  ipcMain.on('ticket', (event, ticket) => {
+    console.log("🚀 ~ ticket:", ticket)
+
+  })
+})
 // In this file you can include the rest of your app's specific main process
 // code. You can also put them in separate files and import them here.

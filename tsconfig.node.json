@@ -1,12 +1,13 @@
 {
   "extends": "@electron-toolkit/tsconfig/tsconfig.node.json",
   "include": [
+    "src/preload/*.d.ts",
     "vite.*.config.ts",
     "forge.env.d.ts",
     "src/main/**/*",
-    "src/preload/**/*"
+    "src/preload/**/*",
   ],
-   "exclude": [
+  "exclude": [
     "**/node_modules",
     "**/dist",
     "**/build",
