@@ -41,8 +41,8 @@ export async function submitTicket(userInput: TicketType) {
 
   let client_credentials = await getToken()
   var data = JSON.stringify({
-    "u_caller_id": "tangj15",
-    "u_pfe_requested_by": "tangj15 ",
+    "u_caller_id": userInput.userName,
+    "u_pfe_requested_by": userInput.userName,
     "u_short_description": userInput.title,
     "u_assignment_group": userInput.queue_val,
     "u_description": userInput.content,

@@ -17,6 +17,7 @@ const config: ForgeConfig = {
   packagerConfig: {
     asar: false,
     overwrite: true, // 确保开启覆盖模式
+    // ignore:['!.env','!.env.local','!.env.keys']
     // 强制保留 node_modules 目录，防止被插件默认行为误删，此方法不work使用打包插件
     // ignore: (path) => {
 

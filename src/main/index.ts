@@ -49,7 +49,7 @@ const createWindow = () => {
     minHeight: 900,
     // fullscreen: false,
     fullscreenable: true,
-    
+
     center: true,
     resizable: true,
     autoHideMenuBar: true,
@@ -132,6 +132,9 @@ app.whenReady().then(_v => {
   console.log("🚀 ~ app.whenReady() process.env.sn_host:", process.env.sn_host)
 
   ipcMain.handle('ticket', ticketController.onTicketSubmit)
+
+  // 获取 Windows 域账号并通过 IPC 提供给 renderer
+  ipcMain.handle('get-domain-user', ticketController.getDomainUser);
 
   // ipcMain.handle()
 }) 

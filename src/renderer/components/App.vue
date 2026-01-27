@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { el } from 'element-plus/es/locale';
 import { watchEffect, reactive, toRaw, computed } from 'vue'
 
 type Option = { des: string; queue: string }
@@ -22,6 +21,13 @@ const ticket = reactive<TicketType>({
   title: '',
   content: '',
   queue_val: '',
+  userName: '',
+})
+
+window.electron.ipcRenderer.invoke("get-domain-user").then(userName => {
+
+  ticket.userName = userName
+
 })
 const result = reactive<{ v?: TicketResponse }>({})
 async function submitTicket() {
@@ -52,7 +58,10 @@ const link = computed(() => {
 
     <el-card style="margin-top: 16px;width: 100%;height: 100%;">
       <div style="margin-bottom: 8px; font-weight: 600;"></div>
+      <el-input v-model="ticket.userName" placeholder="请输入工单提交人" clearable show-word-limit maxlength="100" readonly />
+      <div style="margin-bottom: 8px; font-weight: 600;"></div>
       <el-input v-model="ticket.title" placeholder="请输入工单简要标题" clearable show-word-limit maxlength="100" />
+
       <div style="margin-bottom: 8px; font-weight: 600;"></div>
       <el-input v-model="ticket.content" type="textarea" :rows="6" placeholder="请输入工单详细描述（支持换行）" clearable
         show-word-limit maxlength="1000" />
