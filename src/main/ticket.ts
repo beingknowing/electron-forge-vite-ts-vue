@@ -59,13 +59,13 @@ export async function submitTicket(userInput: TicketType) {
     method: 'post',
     url: `${process.env.sn_host}/api/now/import/u_create_incident_inbound`,
     headers: {
-      'User-Agent': 'Apifox/1.0.0 (https://apifox.com)',
+
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${client_credentials.access_token}`,
       'Accept': '*/*',
-      // Host 头部由 axios 自动设置，无需手动指定
+
       'Connection': 'keep-alive',
-      // 'Cookie': 'BIGipServerpool_pfetst=f0dec4b40e6aa7fbbc9afd1ff3c1126c; JSESSIONID=89FE2B68F2BA241A6345413516513265; glide_user_route=glide.d0fc93c4f352848effe4484033009e26; glide_node_id_for_js=e6f59d33e0883d67227073aa3a3cbc2e7bd32189de853ba0c0e2eeb478fb7e28'
+
     },
     data: data
   };

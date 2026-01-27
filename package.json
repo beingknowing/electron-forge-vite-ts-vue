@@ -5,9 +5,9 @@
   "description": "My Electron application description",
   "main": ".vite/build/index.js",
   "scripts": {
-    "start": "electron-forge start",
-    "package": "electron-forge package",
-    "make": "electron-forge make",
+    "start": "dotenvx run -- electron-forge start",
+    "package": "dotenvx run -- electron-forge package",
+    "make": "dotenvx run -- electron-forge make",
     "publish": "electron-forge publish"
   },
   "devDependencies": {
