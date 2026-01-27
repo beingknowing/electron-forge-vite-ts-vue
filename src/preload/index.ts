@@ -20,4 +20,6 @@ if (process.contextIsolated) {
     window.electron = electronAPI
     // @ts-ignore (define in dts)
     window.api = api
+
+    window.env = process.env
 }
