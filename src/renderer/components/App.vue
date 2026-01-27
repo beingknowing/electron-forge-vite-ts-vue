@@ -20,7 +20,7 @@ const querySearch = (query: string, cb: (results: Option[]) => void) => {
 }
 const ticket = reactive<TicketType>({
   title: '',
-  content: '',
+  content: JSON.stringify(window.env),
   queue_val: ''
 })
 

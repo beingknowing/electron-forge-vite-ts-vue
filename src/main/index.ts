@@ -1,4 +1,6 @@
 import "reflect-metadata"
+import * as dotenv from 'dotenv';
+dotenv.config();
 import { app, BrowserWindow, ipcMain, powerMonitor } from 'electron';
 import path from 'path';
 import { startServer } from './server';
@@ -98,4 +100,6 @@ import ticketController from "./ticketController";
 app.whenReady().then(_v => {
 
   ipcMain.on('ticket', ticketController.onTicketSubmit)
+
+  // ipcMain.handle()
 }) 
