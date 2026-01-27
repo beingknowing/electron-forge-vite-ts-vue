@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, reactive, toRaw } from 'vue'
-
+import { el } from 'element-plus/es/locale';
+import { watchEffect, reactive, toRaw, computed } from 'vue'
 
 type Option = { des: string; queue: string }
 
@@ -20,48 +20,61 @@ const querySearch = (query: string, cb: (results: Option[]) => void) => {
 }
 const ticket = reactive<TicketType>({
   title: '',
-  content: JSON.stringify(window.env),
-  queue_val: ''
+  content: '',
+  queue_val: '',
 })
-
-function submitTicket() {
-  window.electron.ipcRenderer.send("ticket", toRaw(ticket))
-  // TODO: Implement ticket submission logic here
+const result = reactive<{ v?: TicketResponse }>({})
+async function submitTicket() {
+  result.v = undefined
+  result.v = await window.electron.ipcRenderer.invoke("ticket", toRaw(ticket))
   console.log('Submitting ticket:', ticket, 'Queue:', ticket.queue_val)
 
 }
 
-
+const link = computed(() => {
+  if (result.v) {
+    return {
+      txt: result.v.result[0].display_value,
+      href: `https://pfetst.service-now.com/now/sow/record/incident/${result.v?.result[0]?.sys_id}`
+    }
+  }
+  return {
+    txt: 'waiting...',
+    href: `https://pfetst.service-now.com/now/sow/home`
+  }
+})
 
 </script>
 
 <template>
-  <div class="content">
-    <div class="content-container">
-      <main class="main">
-        <h1> 提交工单 </h1><br />
+  <main class="main">
+    <h1> 提交工单 </h1><br />
 
-        <el-card style="margin-top: 16px">
-          <div style="margin-bottom: 8px; font-weight: 600;"></div>
-          <el-input v-model="ticket.title" placeholder="请输入工单简要标题" clearable show-word-limit maxlength="100" />
-          <div style="margin-bottom: 8px; font-weight: 600;"></div>
-          <el-input v-model="ticket.content" type="textarea" :rows="6" placeholder="请输入工单详细描述（支持换行）" clearable
-            show-word-limit maxlength="1000" />
+    <el-card style="margin-top: 16px;width: 100%;height: 100%;">
+      <div style="margin-bottom: 8px; font-weight: 600;"></div>
+      <el-input v-model="ticket.title" placeholder="请输入工单简要标题" clearable show-word-limit maxlength="100" />
+      <div style="margin-bottom: 8px; font-weight: 600;"></div>
+      <el-input v-model="ticket.content" type="textarea" :rows="6" placeholder="请输入工单详细描述（支持换行）" clearable
+        show-word-limit maxlength="1000" />
 
-          <div style="margin-bottom: 8px; font-weight: 600;"></div>
-          <el-autocomplete v-model="ticket.queue_val" :fetch-suggestions="querySearch" placeholder="请输入以筛选队列"
-            value-key="queue">
-            <template #default="scope">
-              <div v-if="scope?.item" class="auto-item"
-                @mouseenter="() => console.log('hover:', scope.item.des, scope.item.queue)">
-                {{ scope.item.des }}（{{ scope.item.queue }}）
-              </div>
-            </template>
-          </el-autocomplete>
-          <div style="margin-bottom: 8px; font-weight: 600;"></div>
-          <el-button type="primary" @click="submitTicket">提交工单</el-button>
-        </el-card>
-      </main>
-    </div>
-  </div>
+      <div style="margin-bottom: 8px; font-weight: 600;"></div>
+      <el-autocomplete v-model="ticket.queue_val" :fetch-suggestions="querySearch" placeholder="请输入以筛选队列"
+        value-key="queue">
+        <template #default="scope">
+          <div v-if="scope?.item" class="auto-item"
+            @mouseenter="() => console.log('hover:', scope.item.des, scope.item.queue)">
+            {{ scope.item.des }}（{{ scope.item.queue }}）
+          </div>
+        </template>
+      </el-autocomplete>
+      <div style="margin-bottom: 8px; font-weight: 600;"></div>
+      <el-button type="primary" @click="submitTicket">提交工单</el-button>
+    </el-card>
+    <el-card style="margin-top: 16px;width: 100%;height: 100%;">
+      <div style="margin-bottom: 8px; font-weight: 600;"></div>
+
+      <el-link :href="link.href" target="_blank">{{ link.txt }}</el-link>
+    </el-card>
+  </main>
+
 </template>

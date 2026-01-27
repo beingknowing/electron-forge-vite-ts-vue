@@ -1,9 +1,9 @@
 
-import type { IpcMainEvent } from 'electron'
+import type { IpcMainInvokeEvent } from 'electron'
+import { submitTicket } from './ticket'
 
 export default {
-    onTicketSubmit(event: IpcMainEvent, data: TicketType) {
-        console.log("🚀 ~ TicketController ~ onTicketSubmit ~ data:", data)
-        console.log("🚀 ~ TicketController ~ onTicketSubmit ~ event:", event)
+    async onTicketSubmit(event: IpcMainInvokeEvent, data: TicketType): Promise<TicketResponse> {
+        return await submitTicket(data)
     }
 }

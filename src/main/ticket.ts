@@ -3,36 +3,80 @@ import * as qs from 'qs';
 
 import type { AxiosRequestConfig } from 'axios';
 
-axios.defaults.baseURL = 'https://api.example.com';
-axios.defaults.timeout = 10000;
+// axios.defaults.baseURL = process.env.sn_host;
+axios.defaults.timeout = 60000;
 
-function getToken() {
+export async function getToken() {
   var data = qs.stringify({
     'grant_type': 'client_credentials',
-    'client_secret': '',
-    'client_id': ''
+    'client_secret': process.env.client_secret,
+    'client_id': process.env.client_id
   });
   var config = {
     method: 'post',
-    url: 'https://pfetst.service-now.com/oauth_token.do',
+    url: `${process.env.sn_host}/oauth_token.do`,
     headers: {
       'User-Agent': 'Apifox/1.0.0 (https://apifox.com)',
-      'Authorization': 'Bearer zSZYMAxgSsUPNu8bse-A8CO7pS9NRYGfqwSOBast_5bNGDUtL3hcuI14RyQb4HAnyDpDyKf9-w6TWG1e17CqEA',
       'Accept': '*/*',
       'Host': 'pfetst.service-now.com',
       'Connection': 'keep-alive',
       'Content-Type': 'application/x-www-form-urlencoded',
-      'Cookie': 'BIGipServerpool_pfetst=f0dec4b40e6aa7fbbc9afd1ff3c1126c; JSESSIONID=21FE46F18B3B2CB9BEE6B65627B31BB5; glide_user_route=glide.d0fc93c4f352848effe4484033009e26; glide_node_id_for_js=e6f59d33e0883d67227073aa3a3cbc2e7bd32189de853ba0c0e2eeb478fb7e28'
+
     },
     data: data
   } satisfies AxiosRequestConfig;
 
-  axios(config)
+  return await axios(config)
     .then(function (response) {
       console.log(JSON.stringify(response.data));
+      return response.data as ClientCredential;
     })
     .catch(function (error) {
       console.log(error);
+      throw new Error(error);
+    });
+}
+
+export async function submitTicket(userInput: TicketType) {
+
+  let client_credentials = await getToken()
+  var data = JSON.stringify({
+    "u_caller_id": "tangj15",
+    "u_pfe_requested_by": "tangj15 ",
+    "u_short_description": userInput.title,
+    "u_assignment_group": userInput.queue_val,
+    "u_description": userInput.content,
+    "u_impact": "2",
+    "u_urgency": "2",
+    "u_contact_type": "internal",
+    "u_comments": "Ticket raised",
+    "u_correlation_id": "",
+    "u_correlation_display": "",
+    "u_use_ci_alert_assignment": 1
+  });
+
+  var config = {
+    method: 'post',
+    url: `${process.env.sn_host}/api/now/import/u_create_incident_inbound`,
+    headers: {
+      'User-Agent': 'Apifox/1.0.0 (https://apifox.com)',
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${client_credentials.access_token}`,
+      'Accept': '*/*',
+      // Host 头部由 axios 自动设置，无需手动指定
+      'Connection': 'keep-alive',
+      // 'Cookie': 'BIGipServerpool_pfetst=f0dec4b40e6aa7fbbc9afd1ff3c1126c; JSESSIONID=89FE2B68F2BA241A6345413516513265; glide_user_route=glide.d0fc93c4f352848effe4484033009e26; glide_node_id_for_js=e6f59d33e0883d67227073aa3a3cbc2e7bd32189de853ba0c0e2eeb478fb7e28'
+    },
+    data: data
+  };
+
+  return await axios(config)
+    .then(function (response) {
+      return response.data as TicketResponse
+    })
+    .catch(function (error) {
+      console.log(error);
+      throw new Error(error);
     });
 
 }
