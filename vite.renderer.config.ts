@@ -25,7 +25,7 @@ export default defineConfig((env) => {
         input: {
           [name]: resolve(__dirname, `${name}.html`),
         },
-        external: ['electron', 'fs', 'path'],
+        // external: ['electron', 'fs', 'path'],
         // output: {
         //   format: 'cjs',
         //   // It should not be split chunks.

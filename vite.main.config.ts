@@ -16,9 +16,9 @@ export default defineConfig((env) => {
         fileName: () => '[name].js',
         formats: ['cjs'],
       },
-      rollupOptions: {
-        external,
-      },
+      // rollupOptions: {
+      //   external,
+      // },
     },
     plugins: [pluginHotRestart('restart')],
     define,

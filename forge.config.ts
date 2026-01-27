@@ -6,19 +6,18 @@ import { MakerRpm } from '@electron-forge/maker-rpm';
 import { VitePlugin } from '@electron-forge/plugin-vite';
 import { FusesPlugin } from '@electron-forge/plugin-fuses';
 import { FuseV1Options, FuseVersion } from '@electron/fuses';
-import { HookFunctionErrorCallback, TargetArch, TargetPlatform } from '@electron/packager/dist/types';
+import { ForgeExternalsPlugin } from './fore-externals-plugin'
 // import VitePluginOptions from '@electron-forge/plugin-vite'
 // import { AutoUnpackNativesPlugin, AutoUnpackNativesConfig } from '@electron-forge/plugin-auto-unpack-natives'
 import { dependencies } from './vite.base.config'
-import { fa } from 'element-plus/es/locale';
 
-const packagedModulePaths = [...dependencies.map(v => `/node_modules/${v}`)]
-const allowList = ['/.vite', '/package.json'];
+// const packagedModulePaths = [...dependencies.map(v => `/node_modules/${v}`)]
+// const allowList = ['/.vite', '/package.json'];
 const config: ForgeConfig = {
   packagerConfig: {
     asar: false,
     overwrite: true, // 确保开启覆盖模式
-    // 强制保留 node_modules 目录，防止被插件默认行为误删
+    // 强制保留 node_modules 目录，防止被插件默认行为误删，此方法不work使用打包插件
     // ignore: (path) => {
 
     //   if (!path) return false;
@@ -27,9 +26,6 @@ const config: ForgeConfig = {
     //   }
     //   // 允许被打包的文件/文件夹：.vite 目录、package.json 和 node_modules
     //   let isAllowed = false
-
-
-
     //   if (path.startsWith('/node_modules')) {
     //     isAllowed = packagedModulePaths.some(item => path.startsWith(item));
     //   } else {
@@ -81,7 +77,11 @@ const config: ForgeConfig = {
       [FuseV1Options.EnableEmbeddedAsarIntegrityValidation]: true,
       [FuseV1Options.OnlyLoadAppFromAsar]: false,
     }),
-
+    //打包必须的插件，否则node_modules不会自动复制
+    new ForgeExternalsPlugin({
+      externals: dependencies,
+      includeDeps: true
+    }, __dirname),
     // new AutoUnpackNativesPlugin({
 
     // } satisfies AutoUnpackNativesConfig)

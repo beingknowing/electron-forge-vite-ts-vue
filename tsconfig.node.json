@@ -3,7 +3,8 @@
   "include": [
      "src/**/*.d.ts",
     "src/preload/*.d.ts",
-    "vite.*.config.ts",
+    "*.ts",
+    "*.d.ts",
     "forge.env.d.ts",
     "src/main/**/*",
     "src/preload/**/*",
