@@ -9,13 +9,14 @@ import { join, resolve } from "node:path"
 // https://vitejs.dev/config
 export default defineConfig((env) => {
   const forgeEnv = env as ConfigEnv<'renderer'>;
-  const { root, mode, forgeConfigSelf } = forgeEnv;
+  const { root, mode, forgeConfigSelf, command } = forgeEnv;
   const name = forgeConfigSelf.name ?? '';
 
   return {
     root,
     mode,
-    base: './src/renderer/',
+    // In packaged Electron apps we load via file://, so assets must be relative.
+    base: command === 'serve' ? '/' : './',
     build: {
       sourcemap: "inline", // 调试，必须开启
       outDir: `.vite/renderer`,

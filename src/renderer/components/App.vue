@@ -7,13 +7,7 @@ type Option = { des: string; queue: string }
 
 const options: Option[] = [
   { des: '域名申请、解析', queue: 'GBL-NETWORK DDI' },
-  { des: '安装操作系统', queue: 'GBL-WTE-SAMS-OS' },
-  { des: '安装数据库', queue: 'GBL-WTE-SAMS-DBA' },
   { des: 'Local App DevOps', queue: 'CHN-LOCAL APP DEVOPS' },
-  { des: '服务器采购', queue: 'GBL-HARDWARE PROCUREMENT' },
-  { des: '软件采购', queue: 'GBL-SOFTWARE PROCUREMENT' },
-  { des: '账号权限申请', queue: 'GBL-ACCOUNT MANAGEMENT' },
-  { des: '其他', queue: 'GBL-OTHER' },
 ]
 
 const querySearch = (query: string, cb: (results: Option[]) => void) => {
@@ -24,7 +18,7 @@ const querySearch = (query: string, cb: (results: Option[]) => void) => {
   )
   cb(result)
 }
-const ticket = reactive({
+const ticket = reactive<TicketType>({
   title: '',
   content: '',
   queue_val: ''

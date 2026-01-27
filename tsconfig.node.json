@@ -1,6 +1,7 @@
 {
   "extends": "@electron-toolkit/tsconfig/tsconfig.node.json",
   "include": [
+     "src/**/*.d.ts",
     "src/preload/*.d.ts",
     "vite.*.config.ts",
     "forge.env.d.ts",

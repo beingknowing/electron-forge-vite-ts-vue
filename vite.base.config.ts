@@ -3,6 +3,8 @@ import type { AddressInfo } from 'node:net';
 import type { ConfigEnv, Plugin, UserConfig } from 'vite';
 import pkg from './package.json';
 
+export const dependencies = [...Object.keys('dependencies' in pkg ? (pkg.dependencies as Record<string, unknown>) : {})];
+
 export const builtins = ['electron', ...builtinModules.map((m) => [m, `node:${m}`]).flat()];
 
 export const external = [...builtins, ...Object.keys('dependencies' in pkg ? (pkg.dependencies as Record<string, unknown>) : {})];

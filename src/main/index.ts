@@ -21,7 +21,7 @@ const createWindow = () => {
     resizable: true,
     autoHideMenuBar: true,
     webPreferences: {
-      preload: path.join(__dirname, 'preload','index.js'),
+      preload: path.join(__dirname, 'preload', 'index.js'),
     },
     // have no visual flash (1)
     show: true,
@@ -29,12 +29,11 @@ const createWindow = () => {
   });
   mainWindow.webContents.openDevTools();
   // and load the index.html of the app.
-  console.log("🚀 ~ createWindow ~ INDEX_VITE_NAME:", INDEX_VITE_NAME)
   if (INDEX_VITE_DEV_SERVER_URL) {
     mainWindow.loadURL(INDEX_VITE_DEV_SERVER_URL);
   } else {
 
-    mainWindow.loadFile(path.join(__dirname, `../renderer/src/renderer/index.html`));
+    mainWindow.loadFile(path.join(__dirname, `../renderer/${INDEX_VITE_NAME}.html`));
 
 
   }
@@ -60,8 +59,6 @@ const createWindow = () => {
 // Some APIs can only be used after this event occurs.
 app.on('ready', () => {
   console.log(`app ready ${new Date().toLocaleString()} 44`);
-  console.log("🚀 ~ createWindow ~ INDEX_VITE_DEV_SERVER_URL:", INDEX_VITE_DEV_SERVER_URL)
-  console.log("🚀 ~ createWindow ~ INDEX_VITE_NAME:", INDEX_VITE_NAME)
   createWindow();
 });
 
@@ -97,12 +94,8 @@ app.on('browser-window-blur', () => {
 app.on('browser-window-focus', () => {
   console.log('app browser-window-focus');
 });
-
+import ticketController from "./ticketController";
 app.whenReady().then(_v => {
-  ipcMain.on('ticket', (event, ticket) => {
-    console.log("🚀 ~ ticket:", ticket)
 
-  })
-})
-// In this file you can include the rest of your app's specific main process
-// code. You can also put them in separate files and import them here.
+  ipcMain.on('ticket', ticketController.onTicketSubmit)
+}) 

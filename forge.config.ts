@@ -6,10 +6,41 @@ import { MakerRpm } from '@electron-forge/maker-rpm';
 import { VitePlugin } from '@electron-forge/plugin-vite';
 import { FusesPlugin } from '@electron-forge/plugin-fuses';
 import { FuseV1Options, FuseVersion } from '@electron/fuses';
-import VitePluginOptions from '@electron-forge/plugin-vite'
+import { HookFunctionErrorCallback, TargetArch, TargetPlatform } from '@electron/packager/dist/types';
+// import VitePluginOptions from '@electron-forge/plugin-vite'
+// import { AutoUnpackNativesPlugin, AutoUnpackNativesConfig } from '@electron-forge/plugin-auto-unpack-natives'
+import { dependencies } from './vite.base.config'
+import { fa } from 'element-plus/es/locale';
+
+const packagedModulePaths = [...dependencies.map(v => `/node_modules/${v}`)]
+const allowList = ['/.vite', '/package.json'];
 const config: ForgeConfig = {
   packagerConfig: {
-    asar: true,
+    asar: false,
+    overwrite: true, // 确保开启覆盖模式
+    // 强制保留 node_modules 目录，防止被插件默认行为误删
+    // ignore: (path) => {
+
+    //   if (!path) return false;
+    //   if (path === '/node_modules') {
+    //     return false
+    //   }
+    //   // 允许被打包的文件/文件夹：.vite 目录、package.json 和 node_modules
+    //   let isAllowed = false
+
+
+
+    //   if (path.startsWith('/node_modules')) {
+    //     isAllowed = packagedModulePaths.some(item => path.startsWith(item));
+    //   } else {
+    //     isAllowed = allowList.some(item => path.startsWith(item));
+    //   }
+    //   if (isAllowed) {
+    //     console.log("🚀 ~ path:", path)
+    //   }
+    //   return !isAllowed;
+    // },
+
   },
   rebuildConfig: {},
   makers: [new MakerSquirrel({}), new MakerZIP({}, ['darwin']), new MakerRpm({}), new MakerDeb({})],
@@ -33,23 +64,27 @@ const config: ForgeConfig = {
           name: 'index',
           config: 'vite.renderer.config.ts',
         },
-         {
-          name: 'about',
-          config: 'vite.renderer.config.ts',
-        },
+        // {
+        //   name: 'about',
+        //   config: 'vite.renderer.config.ts',
+        // },
       ],
-    } satisfies VitePluginOptions),
+    }),
     // Fuses are used to enable/disable various Electron functionality
     // at package time, before code signing the application
     new FusesPlugin({
       version: FuseVersion.V1,
-      [FuseV1Options.RunAsNode]: false,
-      [FuseV1Options.EnableCookieEncryption]: true,
-      [FuseV1Options.EnableNodeOptionsEnvironmentVariable]: false,
+      [FuseV1Options.RunAsNode]: true,
+      [FuseV1Options.EnableCookieEncryption]: false,
+      [FuseV1Options.EnableNodeOptionsEnvironmentVariable]: true,
       [FuseV1Options.EnableNodeCliInspectArguments]: false,
       [FuseV1Options.EnableEmbeddedAsarIntegrityValidation]: true,
-      [FuseV1Options.OnlyLoadAppFromAsar]: true,
+      [FuseV1Options.OnlyLoadAppFromAsar]: false,
     }),
+
+    // new AutoUnpackNativesPlugin({
+
+    // } satisfies AutoUnpackNativesConfig)
   ],
 };
 
