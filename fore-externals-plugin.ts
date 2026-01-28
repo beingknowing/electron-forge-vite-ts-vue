@@ -66,6 +66,11 @@ class ForgeExternalsPlugin extends PluginBase<unknown> {
             }
         }
 
+        if (typeof forgeConfig.packagerConfig.ignore == 'function') {
+
+        }
+
+
         // The webpack plugin already sets the ignore function.
         const existingIgnoreFn = forgeConfig.packagerConfig.ignore as (
             file: string

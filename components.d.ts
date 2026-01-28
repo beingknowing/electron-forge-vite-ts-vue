@@ -16,5 +16,6 @@ declare module 'vue' {
     ElCard: typeof import('element-plus/es')['ElCard']
     ElInput: typeof import('element-plus/es')['ElInput']
     ElLink: typeof import('element-plus/es')['ElLink']
+    ElText: typeof import('element-plus/es')['ElText']
   }
 }

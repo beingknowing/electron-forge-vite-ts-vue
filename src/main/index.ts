@@ -8,7 +8,7 @@ import dotenv from '@dotenvx/dotenvx';
 
 // 加载加密的环境变量
 const env = process.env.NODE_ENV || 'development';
-const envFiles = ['.env', `.env.${env}`, '.env.local'];
+const envFiles = ['.env', `.env.${env}`,];
 
 // 使用 dotenvx 解密并加载配置（config 是同步函数，不需要 await）
 dotenv.config({
@@ -21,6 +21,8 @@ console.log(`Running in ${env} mode`, process.env.sn_host);
 // 拦截所有链接，在系统默认浏览器中打开
 app.on('web-contents-created', (_, contents) => {
   contents.on('will-navigate', (event, url) => {
+    if (url.includes('localhost'))
+      return;
     // 阻止导航，改为在外部浏览器打开
     event.preventDefault();
     shell.openExternal(url);

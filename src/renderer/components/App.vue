@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { computed, reactive, toRaw } from 'vue'
+import { ref, computed, reactive, toRaw } from 'vue'
 import { ElMessage } from 'element-plus'
+import { is } from '@electron-toolkit/utils';
 
 type Option = { des: string; queue: string }
 
@@ -82,11 +83,25 @@ const validateTicket = () => {
   return true
 }
 
+const information = reactive({
+  host: window.env.sn_host,
+})
+
+const isSubmitting = ref(false)
+const enableSubmitBtn = computed(() => isFormValid.value && !isSubmitting.value)
+
 async function submitTicket() {
   if (!validateTicket()) return
-  result.v = undefined
-  result.v = await window.electron.ipcRenderer.invoke('ticket', toRaw(ticket))
-  console.log('Submitting ticket:', ticket, 'Queue:', ticket.queue_val)
+  try {
+    isSubmitting.value = true
+    result.v = undefined
+    result.v = await window.electron.ipcRenderer.invoke('ticket', toRaw(ticket))
+    console.log('Submitting ticket:', ticket, 'Queue:', ticket.queue_val)
+  } finally {
+
+    isSubmitting.value = false
+  }
+
 }
 
 
@@ -94,7 +109,9 @@ async function submitTicket() {
 </script>
 
 <template>
+  <span>{{ information.host }}</span>
   <el-card class="form-card" style="margin-top: 16px;width: 100%;height: 100%;">
+    <el-text class="mx-1" type="primary">{{ }}</el-text>
     <!-- user name -->
     <el-input v-model="ticket.userName" placeholder="请输入工单提交人" clearable show-word-limit maxlength="100" readonly />
     <p class="field-error" v-if="validationMessages.userName">{{ validationMessages.userName }}</p>
@@ -117,7 +134,7 @@ async function submitTicket() {
     </el-autocomplete>
     <p class="field-error" v-if="validationMessages.queue_val">{{ validationMessages.queue_val }}</p>
 
-    <el-button type="primary" :disabled="!isFormValid" @click="submitTicket">提交工单</el-button>
+    <el-button type="primary" :disabled="!enableSubmitBtn" @click="submitTicket">提交工单</el-button>
   </el-card>
   <el-card class="link-card" style="margin-top: 16px;width: 100%;height: 100%;">
     <div style="margin-bottom: 8px; font-weight: 600;"></div>
