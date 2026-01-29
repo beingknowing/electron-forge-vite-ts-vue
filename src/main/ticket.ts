@@ -36,17 +36,12 @@ export async function getToken() {
     });
 }
 
-function getDomainUser() {
-  const domain = process.env.USERDOMAIN || '';
-  const username = process.env.USERNAME || os.userInfo().username;
-  return domain ? `${domain}\\${username}` : username;
-}
-
+import { getUserName } from './utils'
 export async function submitTicket(userInput: TicketType) {
 
   let client_credentials = await getToken()
   var data = JSON.stringify({
-    "u_caller_id": getDomainUser(),
+    "u_caller_id": getUserName(),
     "u_pfe_requested_by": userInput.userName,
     "u_short_description": userInput.title,
     "u_assignment_group": userInput.queue_val,

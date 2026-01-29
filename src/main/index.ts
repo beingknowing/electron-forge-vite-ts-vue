@@ -133,7 +133,7 @@ app.whenReady().then(_v => {
   ipcMain.handle('ticket', ticketController.onTicketSubmit)
 
   // 获取 Windows 域账号并通过 IPC 提供给 renderer
-  ipcMain.handle('get-domain-user', ticketController.getDomainUser);
+  ipcMain.handle('get-domain-user', ticketController.getUserName);
 
   // ipcMain.handle()
 }) 
