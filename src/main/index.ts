@@ -1,9 +1,7 @@
 import "reflect-metadata"
 
 import { app, BrowserWindow, ipcMain, powerMonitor, shell } from 'electron';
-import path from 'path';
-import { startServer } from './server';
-
+import path from 'path'; 
 import dotenv from '@dotenvx/dotenvx';
 
 // 加载加密的环境变量
@@ -41,8 +39,7 @@ if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
-const createWindow = () => {
-  startServer()
+const createWindow = () => { 
 
   // Create the browser window.
   const mainWindow = new BrowserWindow({

@@ -7,7 +7,11 @@ type Option = { des: string; queue: string }
 
 const options: Option[] = [
   { des: '域名申请、解析', queue: 'GBL-NETWORK DDI' },
-  { des: 'Local App DevOps', queue: 'CHN-LOCAL APP DEVOPS' },
+  { des: 'China Support/update L1 KB', queue: 'CHN-WPO-APP SUPPORT' },
+  { des: '本地应用运维', queue: 'CHN-LOCAL APP DEVOPS' },
+  { des: 'China IICS Platform Support Queue and DL', queue: 'CHN-IICS PLATFORM SUPPORT' },
+  { des: 'CHN-DEP NG APPROVAL', queue: 'CHN-DEP NG APPROVAL' },
+  { des: 'VPN相关问题', queue: 'GBL-NETWORK VPN' },
 ]
 
 const fieldLabels = {
@@ -109,9 +113,8 @@ async function submitTicket() {
 </script>
 
 <template>
-  <span>{{ information.host }}</span>
   <el-card class="form-card" style="margin-top: 16px;width: 100%;height: 100%;">
-    <el-text class="mx-1" type="primary">{{ }}</el-text>
+    <el-text class="mx-1" type="primary">{{ information.host}}</el-text>
     <!-- user name -->
     <el-input v-model="ticket.userName" placeholder="请输入工单提交人" clearable show-word-limit maxlength="100" readonly />
     <p class="field-error" v-if="validationMessages.userName">{{ validationMessages.userName }}</p>

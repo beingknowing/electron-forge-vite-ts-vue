@@ -1,5 +1,6 @@
 import axios from 'axios';
 import * as qs from 'qs';
+import * as os from 'os';
 
 import type { AxiosRequestConfig } from 'axios';
 
@@ -18,10 +19,8 @@ export async function getToken() {
     headers: {
       'User-Agent': 'Apifox/1.0.0 (https://apifox.com)',
       'Accept': '*/*',
-      'Host': 'pfetst.service-now.com',
       'Connection': 'keep-alive',
       'Content-Type': 'application/x-www-form-urlencoded',
-
     },
     data: data
   } satisfies AxiosRequestConfig;
@@ -37,11 +36,17 @@ export async function getToken() {
     });
 }
 
+function getDomainUser() {
+  const domain = process.env.USERDOMAIN || '';
+  const username = process.env.USERNAME || os.userInfo().username;
+  return domain ? `${domain}\\${username}` : username;
+}
+
 export async function submitTicket(userInput: TicketType) {
 
   let client_credentials = await getToken()
   var data = JSON.stringify({
-    "u_caller_id": userInput.userName,
+    "u_caller_id": getDomainUser(),
     "u_pfe_requested_by": userInput.userName,
     "u_short_description": userInput.title,
     "u_assignment_group": userInput.queue_val,
@@ -59,13 +64,10 @@ export async function submitTicket(userInput: TicketType) {
     method: 'post',
     url: `${process.env.sn_host}/api/now/import/u_create_incident_inbound`,
     headers: {
-
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${client_credentials.access_token}`,
       'Accept': '*/*',
-
       'Connection': 'keep-alive',
-
     },
     data: data
   };

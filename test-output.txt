@@ -1,0 +1,29 @@
+npm warn Unknown project config "electron_mirror". This will stop working in the next major version of npm.
+npm warn Unknown project config "electron_builder_binaries_mirror". This will stop working in the next major version of npm.
+
+[1m[46m RUN [49m[22m [36mv4.0.18 [39m[90mc:/AppData/code/electrons/electron-forge-vite-ts-vue[39m
+
+ [31m❯[39m src/main/config.test.vitest.ts [2m([22m[2m0 test[22m[2m)[22m
+
+[31m⎯⎯⎯⎯⎯⎯[39m[1m[41m Failed Suites 1 [49m[22m[31m⎯⎯⎯⎯⎯⎯⎯[39m
+
+[41m[1m FAIL [22m[49m src/main/config.test.vitest.ts[2m [ src/main/config.test.vitest.ts ][22m
+[31m[1mTypeError[22m: The "path" argument must be of type string. Received undefined[39m
+[36m [2m❯[22m new ConfigArrayPersistence src/main/config.ts:[2m47:29[22m[39m
+    [90m 45| [39m  [34mconstructor[39m(options[33m?[39m[33m:[39m [33mPersistenceOptions[39m) {
+    [90m 46| [39m    [35mconst[39m userDataPath [33m=[39m app[33m.[39m[34mgetPath[39m([32m'userData'[39m)[33m;[39m
+    [90m 47| [39m    [35mthis[39m[33m.[39mstoragePath [33m=[39m path[33m.[39m[34mjoin[39m(userDataPath[33m,[39m [32m'config-arrays'[39m)[33m;[39m
+    [90m   | [39m                            [31m^[39m
+    [90m 48| [39m    [35mthis[39m[33m.[39mbackupPath [33m=[39m path[33m.[39m[34mjoin[39m(userDataPath[33m,[39m [32m'config-arrays-backup'[39m)[33m;[39m
+    [90m 49| [39m    this.masterKey = process.env.CONFIG_MASTER_KEY || 'default-dev-key…
+[90m [2m❯[22m src/main/config.ts:[2m356:39[22m[39m
+[90m [2m❯[22m src/main/config.test.vitest.ts:[2m6:1[22m[39m
+
+[31m[2m⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯[22m[39m
+
+
+[2m Test Files [22m [1m[31m1 failed[39m[22m[90m (1)[39m
+[2m      Tests [22m [2mno tests[22m
+[2m   Start at [22m 02:04:00
+[2m   Duration [22m 425ms[2m (transform 93ms, setup 0ms, import 0ms, tests 0ms, environment 0ms)[22m
+
