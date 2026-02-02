@@ -23,18 +23,33 @@
         ".idea", // JetBrains IDE 配置文件夹
         "**/*.spec.ts", // 单元测试文件（如果不需要编译）
         "**/__tests__", // 测试文件夹
-        "**/.git"
+        "**/.git",
+         "**/.vite/**"
     ],
     "typescript.tsserver.maxTsServerMemory": 2048, // 限制内存为 4GB
     "typescript.tsserver.watchOptions": {
+
         "watchFile": "useFsEvents", // 使用系统文件监听（Mac/Windows）
         "watchDirectory": "useFsEvents"
     },
-    "typescript.tsserver.experimental.enableProjectDiagnostics": false, // 禁用全项目诊断
+    
+    "typescript.tsserver.experimental.enableProjectDiagnostics": true, // 禁用全项目诊断
     "files.watcherExclude": {
         "**/node_modules/**": true,
         "**/dist/**": true,
         "**/build/**": true,
-        "**/.git/**": true
-    }
+        "**/.git/**": true,
+        "**/.vite/**": true
+    },
+    "typescript.tsserver.useSyntaxServer": "always",
+    "typescript.tsserver.nodePath": "node",
+    "typescript.tsserver.log": "verbose",
+    "typescript.tsserver.enableTracing": true,
+    "javascript.preferences.autoImportFileExcludePatterns": [
+        "**/.vite",
+        "**/node_modules"
+    ],
+    "typescript.workspaceSymbols.scope": "currentProject",
+    "typescript.updateImportsOnPaste.enabled": false,
+    "typescript.tsserver.enableRegionDiagnostics": false
 }

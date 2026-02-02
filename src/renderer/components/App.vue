@@ -2,6 +2,8 @@
 import { ref, computed, reactive, toRaw } from 'vue'
 import { ElMessage } from 'element-plus'
 import { is } from '@electron-toolkit/utils';
+// Explicit .vue extension ensures module resolution consistency across environments
+import Credentials from './Credentials.vue';
 
 type Option = { des: string; queue: string }
 
@@ -113,8 +115,10 @@ async function submitTicket() {
 </script>
 
 <template>
+  <Credentials />
+  <hr />
   <el-card class="form-card" style="margin-top: 16px;width: 100%;height: 100%;">
-    <el-text class="mx-1" type="primary">{{ information.host}}</el-text>
+    <el-text class="mx-1" type="primary">{{ information.host }}</el-text>
     <!-- user name -->
     <el-input v-model="ticket.userName" placeholder="请输入工单提交人" clearable show-word-limit maxlength="100" readonly />
     <p class="field-error" v-if="validationMessages.userName">{{ validationMessages.userName }}</p>
