@@ -1,7 +1,7 @@
 {
   "extends": "@electron-toolkit/tsconfig/tsconfig.node.json",
   "include": [
-     "**/*.d.ts",
+    "**/*.d.ts",
     "src/main/**/*",
     "src/preload/**/*",
   ],
@@ -14,7 +14,15 @@
     ".idea",
     "**/*.spec.ts",
     "**/__tests__",
-    "**/.git"
+    "**/.git",
+    "build",
+    "cache",
+    "library",
+    "node_modules",
+    "temp",
+    ".cocos",
+    "**/*.js",
+    "**/.vite/"
   ],
   "compilerOptions": {
     "composite": true

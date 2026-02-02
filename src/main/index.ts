@@ -3,7 +3,9 @@ import "reflect-metadata"
 import { app, BrowserWindow, ipcMain, powerMonitor, shell } from 'electron';
 import path from 'path'; 
 import dotenv from '@dotenvx/dotenvx';
+import unhandled from 'electron-unhandled';
 
+unhandled();
 // 加载加密的环境变量
 const env = process.env.NODE_ENV || 'development';
 const envFiles = ['.env', `.env.${env}`,];
