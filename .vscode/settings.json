@@ -12,44 +12,22 @@
         "**/.trunk/*plugins/": true
     },
     "explorerExclude.backup": {},
-    "autoRestart.excludePatterns": [
-        "**/node_modules/**",
-        "**/.dist/**",
-        "**/node_modules", // 第三方依赖，不需要编译
-        "**/dist", // 编译输出目录
-        "**/build", // 构建输出目录
-        "coverage", // 测试覆盖率报告
-        ".vscode", // VS Code 配置文件夹
-        ".idea", // JetBrains IDE 配置文件夹
-        "**/*.spec.ts", // 单元测试文件（如果不需要编译）
-        "**/__tests__", // 测试文件夹
-        "**/.git",
-         "**/.vite/**"
-    ],
+   
     "typescript.tsserver.maxTsServerMemory": 2048, // 限制内存为 4GB
     "typescript.tsserver.watchOptions": {
-
         "watchFile": "useFsEvents", // 使用系统文件监听（Mac/Windows）
         "watchDirectory": "useFsEvents"
     },
-    
     "typescript.tsserver.experimental.enableProjectDiagnostics": true, // 禁用全项目诊断
-    "files.watcherExclude": {
-        "**/node_modules/**": true,
-        "**/dist/**": true,
-        "**/build/**": true,
-        "**/.git/**": true,
-        "**/.vite/**": true
-    },
+
     "typescript.tsserver.useSyntaxServer": "always",
     "typescript.tsserver.nodePath": "node",
     "typescript.tsserver.log": "verbose",
     "typescript.tsserver.enableTracing": true,
-    "javascript.preferences.autoImportFileExcludePatterns": [
-        "**/.vite",
-        "**/node_modules"
-    ],
+
     "typescript.workspaceSymbols.scope": "currentProject",
     "typescript.updateImportsOnPaste.enabled": false,
-    "typescript.tsserver.enableRegionDiagnostics": false
+    "typescript.tsserver.enableRegionDiagnostics": false,
+    "typescript.tsserver.web.typeAcquisition.enabled": true,
+    "typescript.check.npmIsInstalled": true
 }

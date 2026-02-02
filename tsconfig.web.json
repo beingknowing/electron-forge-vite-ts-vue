@@ -14,8 +14,8 @@
         "src/renderer/*"
       ]
     }
-  }, 
-    "exclude": [
+  },
+  "exclude": [
     "**/node_modules",
     "**/dist",
     "**/build",

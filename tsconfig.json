@@ -1,5 +1,5 @@
 {
-  "compilerOptions": { 
+  "compilerOptions": {
     "strict": true,
     "forceConsistentCasingInFileNames": true
   },
@@ -10,8 +10,8 @@
     {
       "path": "./tsconfig.web.json"
     }
-  ], 
-    "exclude": [
+  ],
+  "exclude": [
     "**/node_modules",
     "**/dist",
     "**/build",
