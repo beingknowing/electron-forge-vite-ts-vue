@@ -2,14 +2,15 @@ import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
 import Store from 'secure-electron-store'
 import fs from 'fs'
-let store = new Store<ConfigArray>();
+const store = new Store<ConfigArray>({
+    name: 'config',
+    encryptionKey: '123456'
+})
 // Custom APIs for renderer
 const api = {
     store: store.preloadBindings(ipcRenderer, fs)
 }
-
-api.store.initial();
-api.store.setPasskey('123456');
+ 
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise
 // just add to the DOM global.

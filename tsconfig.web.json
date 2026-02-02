@@ -14,24 +14,5 @@
         "src/renderer/*"
       ]
     }
-  },
-  "exclude": [
-    "**/node_modules",
-    "**/dist",
-    "**/build",
-    "coverage",
-    ".vscode",
-    ".idea",
-    "**/*.spec.ts",
-    "**/__tests__",
-    "**/.git",
-    "build",
-    "cache",
-    "library",
-    "node_modules",
-    "temp",
-    ".cocos",
-    "**/*.js",
-    "**/.vite/"
-  ],
+  }, 
 }

@@ -13,7 +13,7 @@
     },
     "explorerExclude.backup": {},
    
-    "typescript.tsserver.maxTsServerMemory": 2048, // 限制内存为 4GB
+    "typescript.tsserver.maxTsServerMemory": 4096, // 限制内存为 4GB
     "typescript.tsserver.watchOptions": {
         "watchFile": "useFsEvents", // 使用系统文件监听（Mac/Windows）
         "watchDirectory": "useFsEvents"
@@ -21,7 +21,7 @@
     "typescript.tsserver.experimental.enableProjectDiagnostics": true, // 禁用全项目诊断
 
     "typescript.tsserver.useSyntaxServer": "always",
-    "typescript.tsserver.nodePath": "node",
+    "typescript.tsserver.nodePath": "",
     "typescript.tsserver.log": "verbose",
     "typescript.tsserver.enableTracing": true,
 
@@ -29,5 +29,12 @@
     "typescript.updateImportsOnPaste.enabled": false,
     "typescript.tsserver.enableRegionDiagnostics": false,
     "typescript.tsserver.web.typeAcquisition.enabled": true,
-    "typescript.check.npmIsInstalled": true
+    "typescript.check.npmIsInstalled": true,
+    "debug.showVariableTypes": true,
+    "github.copilot.chat.languageContext.fix.typescript.enabled": true,
+    "github.copilot.chat.languageContext.inline.typescript.enabled": true,
+    "docwriter.progress.trackTypes": true,
+    "typescript.enablePromptUseWorkspaceTsdk": true,
+    "typescript.preferGoToSourceDefinition": true,
+    "typescript.tsserver.web.projectWideIntellisense.suppressSemanticErrors": true
 }

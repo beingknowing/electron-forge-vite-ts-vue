@@ -23,10 +23,13 @@
 </template>
 <script setup>
 import { ref } from 'vue';
-window.api.store;
+import { readConfigRequest } from 'secure-electron-store';
 const tableData = ref([
   // ... 数据项
 ]);
+window.api.store.onReceive('readConfigRequest', (data) => {
+  tableData.value = data;
+});
 const handleEdit = (row) => {
   row.editing = true;
 };
