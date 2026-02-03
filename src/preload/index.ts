@@ -1,14 +1,14 @@
 import { contextBridge, ipcRenderer } from 'electron'
 import { electronAPI } from '@electron-toolkit/preload'
-import Store from 'secure-electron-store'
-import fs from 'fs'
-const store = new Store<ConfigArray>({
-    name: 'config',
-    encryptionKey: '123456'
-})
-// Custom APIs for renderer
+// import Store from 'secure-electron-store'
+// import fs from 'fs'
+// const store = new Store<ConfigArray>({
+//     name: 'config',
+//     encryptionKey: '123456'
+// })
+// // Custom APIs for renderer
 const api = {
-    store: store.preloadBindings(ipcRenderer, fs)
+    // store: store.preloadBindings(ipcRenderer, fs)
 }
  
 // Use `contextBridge` APIs to expose Electron APIs to
