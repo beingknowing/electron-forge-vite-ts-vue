@@ -2,6 +2,8 @@
   <div class="credentials-container">
     <el-button type="primary" @click="handleAdd" class="add-button">添加行</el-button>
     <el-table :data="tableData" border>
+      <el-table-column prop="isCurrent" label="是否当前"></el-table-column>
+
       <el-table-column prop="date" label="日期"></el-table-column>
       <el-table-column prop="name" label="姓名"></el-table-column>
       <el-table-column prop="address" label="地址"></el-table-column>
@@ -22,21 +24,35 @@
   </div>
 </template>
 <script setup>
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
 import { readConfigRequest } from 'secure-electron-store';
-const tableData = ref([
-  // ... 数据项
+import { ConfigsType, ConfigType } from '../../types';
+const tableData = reactive < ConfigsType > ([
+  {
+    date: '2024-01-01',
+    name: '张三',
+    address: '北京市朝阳区',
+    value: '示例值1',
+    isCurrent: true,
+    editing: false
+  },
+  {
+    date: '2024-02-01',
+    name: '李四',
+    address: '上海市浦东新区',
+    value: '示例值2',
+    isCurrent: false,
+    editing: false
+  }
 ]);
-window.api.store.onReceive('readConfigRequest', (data) => {
-  tableData.value = data;
-});
-const handleEdit = (row) => {
+
+const handleEdit = (row: ConfigType) => {
   row.editing = true;
 };
 const handleSave = () => {
   // 保存数据逻辑
 };
-const handleDelete = (row) => {
+const handleDelete = (row: ConfigType) => {
   // 删除数据逻辑
 };
 const handleAdd = () => {
