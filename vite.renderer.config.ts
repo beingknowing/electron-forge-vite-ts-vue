@@ -1,11 +1,12 @@
 import type { ConfigEnv, UserConfig } from 'vite';
 import { defineConfig } from 'vite';
 import { pluginExposeRenderer, external } from './vite.base.config';
-import vue from '@vitejs/plugin-vue';
+// Use require syntax to bypass TS module resolution issues while maintaining runtime functionality
+const vue = require('@vitejs/plugin-vue');
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
-import { join, resolve } from "node:path"
+import { join, resolve } from "node:path";
 // https://vitejs.dev/config
 export default defineConfig((env) => {
   const forgeEnv = env as ConfigEnv<'renderer'>;

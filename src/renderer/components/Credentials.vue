@@ -23,11 +23,10 @@
     </el-table>
   </div>
 </template>
-<script setup>
-import { ref, reactive } from 'vue';
-import { readConfigRequest } from 'secure-electron-store';
+<script setup lang="ts">
+import { reactive } from 'vue';
 import { ConfigsType, ConfigType } from '../../types';
-const tableData = reactive < ConfigsType > ([
+const tableData = reactive<ConfigsType>([
   {
     date: '2024-01-01',
     name: '张三',
