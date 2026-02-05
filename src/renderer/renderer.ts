@@ -29,11 +29,11 @@
 import './assets/index.css';
 import { createApp } from 'vue';
 import App from './components/App.vue';
-import ElementPlus from 'element-plus'
+// import ElementPlus from 'element-plus'
 
 const app = createApp(App)
 
-app.use(ElementPlus)
+// app.use(ElementPlus)
 app.mount('#app')
 
 console.log('👋 This message is being logged by "renderer.ts", included via Vite');
