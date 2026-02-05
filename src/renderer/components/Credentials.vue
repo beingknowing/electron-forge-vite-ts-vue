@@ -52,7 +52,7 @@ const handleDelete = (row: ConfigType) => {
 };
 const handleAdd = () => {
   const newRow = {
-  client_secret: '',
+    client_secret: '',
     client_id: '',
     sn_host: '',
     isCurrent: true,

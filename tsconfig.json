@@ -2,6 +2,7 @@
   "compilerOptions": {
     "strict": true,
     "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
     "types": [],
     "typeRoots": [
       "./node_modules/@types",
@@ -24,6 +25,6 @@
     "build",
     "cache",
     "**/.vite/",
-    "**/node_modules"
+    "node_modules"
   ],
 }
