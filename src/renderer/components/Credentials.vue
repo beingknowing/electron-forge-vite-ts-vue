@@ -24,28 +24,25 @@
   </div>
 </template>
 <script setup lang="ts">
-// import { ConfigsType, ConfigType } from './../../';
+import { ConfigsType, ConfigType } from '../../../types';
+
 const tableData = reactive<ConfigsType>([
   {
-    date: '2024-01-01',
-    name: '张三',
-    address: '北京市朝阳区',
-    value: '示例值1',
+    client_secret: '',
+    client_id: '',
+    sn_host: '',
     isCurrent: true,
-    editing: false
   },
   {
-    date: '2024-02-01',
-    name: '李四',
-    address: '上海市浦东新区',
-    value: '示例值2',
+    client_secret: '',
+    client_id: '',
+    sn_host: '',
     isCurrent: false,
-    editing: false
   }
 ]);
 
 const handleEdit = (row: ConfigType) => {
-  row.editing = true;
+
 };
 const handleSave = () => {
   // 保存数据逻辑
@@ -55,11 +52,10 @@ const handleDelete = (row: ConfigType) => {
 };
 const handleAdd = () => {
   const newRow = {
-    date: new Date().toISOString().split('T')[0],
-    name: '',
-    address: '',
-    value: '',
-    editing: true
+  client_secret: '',
+    client_id: '',
+    sn_host: '',
+    isCurrent: true,
   };
   tableData.push(newRow);
 };

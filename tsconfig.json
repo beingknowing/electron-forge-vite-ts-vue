@@ -23,6 +23,7 @@
     "**/.git",
     "build",
     "cache",
-    "**/.vite/"
+    "**/.vite/",
+    "**/node_modules"
   ],
 }
