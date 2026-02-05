@@ -3,7 +3,8 @@ import { ref, computed, reactive, toRaw } from 'vue'
 import { ElMessage } from 'element-plus'
 import { is } from '@electron-toolkit/utils';
 // Explicit .vue extension ensures module resolution consistency across environments
-import Credentials from './Credentials.vue';
+import Credentials from '../views/Credentials.vue';
+import { RouterView } from 'vue-router';
 
 type Option = { des: string; queue: string }
 
@@ -115,7 +116,10 @@ async function submitTicket() {
 </script>
 
 <template>
-  <Credentials />
+  <RouterLink to="/view-one">ViewOne</RouterLink>
+  <RouterLink to="/view-two">ViewTwo</RouterLink>
+  <RouterLink to="/credentials">Credentials</RouterLink>
+  <RouterView />
   <hr />
   <el-card class="form-card" style="margin-top: 16px;width: 100%;height: 100%;">
     <el-text class="mx-1" type="primary">{{ information.host }}</el-text>

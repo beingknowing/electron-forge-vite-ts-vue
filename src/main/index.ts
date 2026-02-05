@@ -1,7 +1,9 @@
 import "reflect-metadata"
 
+import { is } from '@electron-toolkit/utils'
+import { join } from 'path'
 import { app, BrowserWindow, ipcMain, powerMonitor, shell } from 'electron';
-import path from 'path'; 
+import path from 'path';
 import dotenv from '@dotenvx/dotenvx';
 // import unhandled from 'electron-unhandled';
 
@@ -41,7 +43,41 @@ if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
-const createWindow = () => { 
+
+/**
+ * 创建并返回一个指定路由路径的浏览器窗口
+ * @param {string} [routePath='/'] - 要加载的路由路径，默认为根路径
+ * @returns {BrowserWindow} 新创建的浏览器窗口实例
+ * @throws {Error} 当开发环境下 ELECTRON_RENDERER_URL 未定义时抛出错误
+ */
+function createRouteWindow(routePath: string = '/') {
+  const win = new BrowserWindow({
+    width: 900,
+    height: 670,
+    webPreferences: {
+      preload: join(__dirname, '../preload/index.js'),
+    }
+  })
+
+  // 拼接 URL：开发环境下带 Hash，生产环境下指向 index.html 的 Hash
+  if (is.dev && process.env['ELECTRON_RENDERER_URL']) {
+    win.loadURL(`${process.env['ELECTRON_RENDERER_URL']}/#${routePath}`)
+  } else {
+    win.loadFile(join(__dirname, '../renderer/index.html'), { hash: routePath })
+  }
+
+  return win
+}
+/**
+ * 创建并配置主浏览器窗口
+ * @param {string} [routePath='/'] - 路由路径，用于开发环境和生产环境下的URL拼接
+ * @description 
+ * - 创建具有默认配置的浏览器窗口
+ * - 根据环境变量加载不同URL（开发环境使用Vite服务器URL，生产环境加载本地HTML文件）
+ * - 添加窗口就绪显示事件监听
+ * - 添加电源状态变化监听（恢复/挂起）
+ */
+const createWindow = (routePath: string = '/') => {
 
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -63,15 +99,20 @@ const createWindow = () => {
   });
   // mainWindow.webContents.openDevTools();
   // and load the index.html of the app.
+  // if (INDEX_VITE_DEV_SERVER_URL) {
+  //   mainWindow.loadURL(INDEX_VITE_DEV_SERVER_URL);
+  // } else {
+
+  //   mainWindow.loadFile(path.join(__dirname, `../renderer/${INDEX_VITE_NAME}.html`));
+  // }
+  // 拼接 URL：开发环境下带 Hash，生产环境下指向 index.html 的 Hash
+  // console.log("🚀 ~ createWindow ~ global[INDEX_VITE_DEV_SERVER_URL]:", this["INDEX_VITE_DEV_SERVER_URL"])
+  console.log("🚀 ~ createWindow ~ INDEX_VITE_DEV_SERVER_URL:", INDEX_VITE_DEV_SERVER_URL)
   if (INDEX_VITE_DEV_SERVER_URL) {
-    mainWindow.loadURL(INDEX_VITE_DEV_SERVER_URL);
+    mainWindow.loadURL(`${INDEX_VITE_DEV_SERVER_URL}/#${routePath}`)
   } else {
-
-    mainWindow.loadFile(path.join(__dirname, `../renderer/${INDEX_VITE_NAME}.html`));
-
-
+    mainWindow.loadFile(join(__dirname, `../renderer/${INDEX_VITE_NAME}.html`), { hash: routePath })
   }
-
   // have no visual flash (2)
   mainWindow.once('ready-to-show', () => {
     mainWindow.show()

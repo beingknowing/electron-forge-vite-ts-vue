@@ -7,6 +7,7 @@ import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
 import { join, resolve } from "node:path";
+import VueRouter from 'unplugin-vue-router/vite'
 // https://vitejs.dev/config
 export default defineConfig((env) => {
   const forgeEnv = env as ConfigEnv<'renderer'>;
@@ -39,6 +40,10 @@ export default defineConfig((env) => {
       }
     },
     plugins: [
+      VueRouter({
+        routesFolder: 'src/renderer/views', // 扫描页面的目录
+        dts: 'src/typed-router.d.ts', // 自动生成类型定义文件
+      }),
       pluginExposeRenderer(name),
       vue({}),
       AutoImport({
@@ -69,7 +74,11 @@ export default defineConfig((env) => {
     ],
     resolve: {
       preserveSymlinks: true,
+      alias: {
+        '@': resolve(__dirname, 'src/renderer/src')
+      }
     },
+
     clearScreen: false,
   } as UserConfig;
 });
