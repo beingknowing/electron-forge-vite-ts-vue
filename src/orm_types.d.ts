@@ -26,3 +26,12 @@ interface TicketResult {
     "status": string; //"inserted",
     "sys_id": string;// "15aff0c01bbaf21076c00dc5604bcb9e"
 }
+
+ interface ConfigType {
+    isCurrent: boolean;
+    client_secret: string;
+    client_id: string;
+    sn_host: string;
+}
+
+ interface ConfigsType extends Array<ConfigType> { }

@@ -1,6 +1,5 @@
 import axios from 'axios';
 import * as qs from 'qs';
-import * as os from 'os';
 
 import type { AxiosRequestConfig } from 'axios';
 
