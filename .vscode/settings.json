@@ -1,40 +1,13 @@
 {
-    "files.exclude": {
-        "**/.git": true,
-        "**/.svn": true,
-        "**/.hg": true,
-        "**/.DS_Store": true,
-        "**/Thumbs.db": true,
-        "**/.trunk/*actions/": true,
-        "**/.trunk/*logs/": true,
-        "**/.trunk/*notifications/": true,
-        "**/.trunk/*out/": true,
-        "**/.trunk/*plugins/": true
-    },
-    "explorerExclude.backup": {},
-   
-    "typescript.tsserver.maxTsServerMemory": 4096, // 限制内存为 4GB
+    "typescript.tsserver.maxTsServerMemory": 8192, // 限制内存为 8GB
     "typescript.tsserver.watchOptions": {
         "watchFile": "useFsEvents", // 使用系统文件监听（Mac/Windows）
         "watchDirectory": "useFsEvents"
     },
     "typescript.tsserver.experimental.enableProjectDiagnostics": true, // 禁用全项目诊断
-
-    "typescript.tsserver.useSyntaxServer": "always",
-    "typescript.tsserver.nodePath": "",
-    "typescript.tsserver.log": "verbose",
-    "typescript.tsserver.enableTracing": true,
-
     "typescript.workspaceSymbols.scope": "currentProject",
-    "typescript.updateImportsOnPaste.enabled": false,
-    "typescript.tsserver.enableRegionDiagnostics": false,
-    "typescript.tsserver.web.typeAcquisition.enabled": true,
-    "typescript.check.npmIsInstalled": true,
     "debug.showVariableTypes": true,
     "github.copilot.chat.languageContext.fix.typescript.enabled": true,
     "github.copilot.chat.languageContext.inline.typescript.enabled": true,
     "docwriter.progress.trackTypes": true,
-    "typescript.enablePromptUseWorkspaceTsdk": true,
-    "typescript.preferGoToSourceDefinition": true,
-    "typescript.tsserver.web.projectWideIntellisense.suppressSemanticErrors": true
 }

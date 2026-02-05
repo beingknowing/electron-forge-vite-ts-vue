@@ -1,5 +1,5 @@
-
-   export type ConfigType = {
+declare global {
+    export type ConfigType = {
         isCurrent: boolean;
         client_secret: string;
         client_id: string;
@@ -7,3 +7,5 @@
     }
 
     export type ConfigsType = Array<ConfigType>;
+}
+

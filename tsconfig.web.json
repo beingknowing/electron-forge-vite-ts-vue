@@ -7,12 +7,16 @@
     "src/preload/*.ts",
   ],
   "compilerOptions": {
+    "moduleResolution": "bundler",
+    "types": [
+      "vite/client"
+    ],
     "composite": true,
-    "baseUrl": ".",
+    "baseUrl": "./",
     "paths": {
       "@renderer/*": [
-        "src/renderer/*"
+        "./src/renderer/*"
       ]
-    }
-  }, 
+    },
+  },
 }

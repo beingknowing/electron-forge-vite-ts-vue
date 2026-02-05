@@ -4,8 +4,9 @@
     "**/*.d.ts",
     "src/main/**/*",
     "src/preload/**/*",
-  ], 
-  "compilerOptions": {
+    "*.ts"
+  ],
+  "compilerOptions": {   
     "composite": true
   }
 }

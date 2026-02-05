@@ -24,8 +24,7 @@
   </div>
 </template>
 <script setup lang="ts">
-import { reactive } from 'vue';
-import { ConfigsType, ConfigType } from '../../types';
+// import { ConfigsType, ConfigType } from './../../';
 const tableData = reactive<ConfigsType>([
   {
     date: '2024-01-01',
@@ -62,6 +61,6 @@ const handleAdd = () => {
     value: '',
     editing: true
   };
-  tableData.value.push(newRow);
+  tableData.push(newRow);
 };
 </script>
