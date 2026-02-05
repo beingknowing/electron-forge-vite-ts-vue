@@ -1,13 +1,20 @@
 <!DOCTYPE html>
 <html lang="zh">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Quick Ticket</title>
-    <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="./src/renderer/renderer.ts"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quick Ticket</title>
+  <!-- <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'"> -->
+</head>
+
+<body>
+  <div id="app"></div>
+  <route lang="yaml">
+    meta:
+    layout: empty # 对应 layouts/empty.vue
+  </route>
+  <script type="module" src="./src/renderer/renderer.ts"></script>
+</body>
+
 </html>

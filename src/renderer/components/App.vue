@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { ref, computed, reactive, toRaw } from 'vue'
 import { ElMessage } from 'element-plus'
-import { is } from '@electron-toolkit/utils';
 // Explicit .vue extension ensures module resolution consistency across environments
-import Credentials from '../views/Credentials.vue';
+
 import { RouterView } from 'vue-router';
 
 type Option = { des: string; queue: string }
@@ -114,11 +113,10 @@ async function submitTicket() {
 
 
 </script>
-
 <template>
-  <RouterLink to="/view-one">ViewOne</RouterLink>
-  <RouterLink to="/view-two">ViewTwo</RouterLink>
-  <RouterLink to="/credentials">Credentials</RouterLink>
+  <RouterLink to="/settings/credentials">Settings</RouterLink>
+  <RouterLink to="/routeTest/viewOne">ViewOne</RouterLink>
+  <RouterLink to="/routeTest/viewTwo">ViewTwo</RouterLink> 
   <RouterView />
   <hr />
   <el-card class="form-card" style="margin-top: 16px;width: 100%;height: 100%;">
