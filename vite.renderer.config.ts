@@ -42,7 +42,7 @@ export default defineConfig((env) => {
     plugins: [
       VueRouter({
         routesFolder: 'src/renderer/views', // 扫描页面的目录
-        dts: 'src/typed-router.d.ts', // 自动生成类型定义文件
+        dts: 'src/renderer/typed-router.d.ts', // 自动生成类型定义文件
       }),
       pluginExposeRenderer(name),
       vue({}),
@@ -75,7 +75,7 @@ export default defineConfig((env) => {
     resolve: {
       preserveSymlinks: true,
       alias: {
-        '@': resolve(__dirname, 'src/renderer/src')
+        '@': resolve(__dirname, 'src/renderer/')
       }
     },
 

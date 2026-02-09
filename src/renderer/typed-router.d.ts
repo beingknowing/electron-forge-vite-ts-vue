@@ -51,6 +51,13 @@ declare module 'vue-router/auto-routes' {
       Record<never, never>,
       | never
     >,
+    '/ticket/Ticket': RouteRecordInfo<
+      '/ticket/Ticket',
+      '/ticket/Ticket',
+      Record<never, never>,
+      Record<never, never>,
+      | never
+    >,
   }
 
   /**
@@ -85,6 +92,12 @@ declare module 'vue-router/auto-routes' {
     'src/renderer/views/settings/Credentials.vue': {
       routes:
         | '/settings/Credentials'
+      views:
+        | never
+    }
+    'src/renderer/views/ticket/Ticket.vue': {
+      routes:
+        | '/ticket/Ticket'
       views:
         | never
     }

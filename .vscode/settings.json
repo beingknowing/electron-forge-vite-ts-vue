@@ -10,4 +10,27 @@
     "github.copilot.chat.languageContext.fix.typescript.enabled": true,
     "github.copilot.chat.languageContext.inline.typescript.enabled": true,
     "docwriter.progress.trackTypes": true,
+    "files.exclude": {
+        "**/.git": false,
+        "**/.svn": false,
+        "**/.hg": false,
+        "**/.DS_Store": false,
+        "**/Thumbs.db": false
+    },
+    "explorerExclude.backup": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true
+    },
+    "gitlens.views.repositories.showContributors": false,
+    "gitlens.views.showComparisonContributors": false,
+    "gitlens.views.contributors.pullRequests.enabled": false,
+    "gitlens.views.contributors.pullRequests.showForCommits": false,
+    "gitlens.views.contributors.avatars": true,
+    "gitlens.views.workspaces.showContributors": false,
+    "git.decorations.enabled": true,
+    "gitlens.views.contributors.reveal": true,
+    "gitlens.views.contributors.files.compact": true,
 }

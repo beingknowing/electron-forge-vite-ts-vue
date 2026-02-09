@@ -7,7 +7,12 @@
     "typeRoots": [
       "./node_modules/@types",
       "./types"
-    ]
+    ],
+    "paths": {
+      "@/*": [
+        "./src/renderer/*"
+      ]
+    }
   },
   "references": [
     {
@@ -22,9 +27,9 @@
     "**/build",
     ".vscode",
     "**/.git",
-    "build",
+    "**/build",
     "cache",
     "**/.vite/",
-    "node_modules"
+    "**/node_modules"
   ],
 }

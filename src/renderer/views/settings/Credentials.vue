@@ -24,6 +24,8 @@
   </div>
 </template>
 <script setup lang="ts">
+import { ConfigsType, ConfigType } from '../../../orm_types';
+
 
 const tableData = reactive<ConfigsType>([
   {

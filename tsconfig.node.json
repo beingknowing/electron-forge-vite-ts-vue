@@ -6,7 +6,17 @@
     "src/preload/**/*",
     "*.ts"
   ],
-  "compilerOptions": {   
+  "compilerOptions": {
     "composite": true
-  }
+  },
+  "exclude": [
+    "**/dist",
+    "**/build",
+    ".vscode",
+    "**/.git",
+    "**/build",
+    "cache",
+    "**/.vite/",
+    "**/node_modules"
+  ],
 }
