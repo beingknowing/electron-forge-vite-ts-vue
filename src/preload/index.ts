@@ -10,7 +10,7 @@ import { electronAPI } from '@electron-toolkit/preload'
 const api = {
     // store: store.preloadBindings(ipcRenderer, fs)
 }
- 
+
 // Use `contextBridge` APIs to expose Electron APIs to
 // renderer only if context isolation is enabled, otherwise
 // just add to the DOM global.
@@ -18,7 +18,7 @@ if (process.contextIsolated) {
     try {
         contextBridge.exposeInMainWorld('electron', electronAPI)
         contextBridge.exposeInMainWorld('api', api)
-        contextBridge.exposeInMainWorld('env', process.env)
+        // contextBridge.exposeInMainWorld('env', process.env)
     } catch (error) {
         console.error(error)
     }
@@ -28,5 +28,5 @@ if (process.contextIsolated) {
     // @ts-ignore (define in dts)
     window.api = api
 
-    window.env = process.env
+    // window.env = process.env
 }
