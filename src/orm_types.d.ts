@@ -1,5 +1,6 @@
 
 export interface TicketType {
+
     title: string;
     content: string;
     queue_val: string;
@@ -8,9 +9,9 @@ export interface TicketType {
 
 export interface ClientCredential {
     "access_token": string,
-        "scope": string,
-            "token_type": string,
-                "expires_in": number
+    "scope": string,
+    "token_type": string,
+    "expires_in": number
 }
 
 export interface TicketResponse {
@@ -27,10 +28,16 @@ export interface TicketResult {
     "status": string; //"inserted",
     "sys_id": string;// "15aff0c01bbaf21076c00dc5604bcb9e"
 }
-export interface ConfigType {
-    isCurrent: boolean;
-    client_secret: string;
-    client_id: string;
-    sn_host: string;
+export interface CredentialItem {
+    key: 'prod' | 'test' | 'stage';
+    isCurrent?: boolean;
+    client_secret?: string;
+    client_id?: string;
+    sn_host?: string;
+    editing?: boolean;
 }
-export interface ConfigsType extends Array<ConfigType> { }
+
+export interface CredentialState {
+    tableData: CredentialItem[];
+    // currentKey: CredentialItem['key'] | undefined;
+}

@@ -1,5 +1,6 @@
 <!-- src/renderer/src/views/(default)/_layout.vue -->
 <template>
+  xxxxxxxxxxxxxx
   <div class="main-window-layout">
     <aside>VSCode 侧边栏</aside>
     <main>

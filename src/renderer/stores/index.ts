@@ -5,7 +5,8 @@ const pinia = createPinia()
 pinia.use(createPersistedState({
     key: key => `my-app-${key}`,
     storage: window.localStorage,
-    afterHydrate: () => { }
+    debug: true
+
 
 }))
 
