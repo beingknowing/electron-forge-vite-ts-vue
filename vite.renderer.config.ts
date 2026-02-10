@@ -45,11 +45,9 @@ export default defineConfig((env) => {
           /\.md$/,
         ],
         imports: [
-          // 插件预设支持导入的api
-          // 'vue',
-          // 'vue-router',
-          // 'pinia'
-          // 自定义导入的api
+          'vue',
+          'vue-router',
+          'pinia'
         ],
         eslintrc: {
           enabled: true, // Default `false`
