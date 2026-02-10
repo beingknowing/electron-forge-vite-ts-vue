@@ -6,6 +6,9 @@ import vue from '@vitejs/plugin-vue'
 import AutoImport from 'unplugin-auto-import/vite';
 import Components from 'unplugin-vue-components/vite';
 import { ElementPlusResolver } from 'unplugin-vue-components/resolvers';
+import Icons from 'unplugin-icons/vite'
+import IconsResolver from 'unplugin-icons/resolver'
+
 import { resolve } from "node:path";
 import VueRouter from 'unplugin-vue-router/vite'
 // https://vitejs.dev/config
@@ -27,25 +30,13 @@ export default defineConfig((env) => {
         input: {
           [name]: resolve(__dirname, `${name}.html`),
         },
-        // external: ['electron', 'fs', 'path'],
-        // output: {
-        //   format: 'cjs',
-        //   // It should not be split chunks.
-        //   inlineDynamicImports: true,
-        //   entryFileNames: `[name].js`,
-        //   chunkFileNames: `[name].js`,
-        //   assetFileNames: `[name].[ext]`,
-
-        // },
       }
     },
     plugins: [
       VueRouter({
         routesFolder: 'src/renderer/views', // 扫描页面的目录
-        dts: 'src/renderer/typed-router.d.ts', // 自动生成类型定义文件
+        dts: 'types/typed-router.d.ts', // 自动生成类型定义文件
       }),
-      pluginExposeRenderer(name),
-      vue({}),
       AutoImport({
         include: [
           /\.[tj]sx?$/,
@@ -55,7 +46,7 @@ export default defineConfig((env) => {
         ],
         imports: [
           // 插件预设支持导入的api
-          'vue',
+          // 'vue',
           // 'vue-router',
           // 'pinia'
           // 自定义导入的api
@@ -65,12 +56,33 @@ export default defineConfig((env) => {
           // filepath: './.eslintrc-auto-import.json', // Default `./.eslintrc-auto-import.json`
           globalsPropValue: true, // Default `true`, (true | false | 'readonly' | 'readable' | 'writable' | 'writeable')
         },
-        dts: true,
-        resolvers: [ElementPlusResolver()],
+        dts: resolve(__dirname, 'types/auto-imports.d.ts'),
+        resolvers: [
+          ElementPlusResolver(),
+          // 自动导入图标组件 
+          IconsResolver({
+            prefix: 'Icon',
+          })
+        ],
       }),
       Components({
-        resolvers: [ElementPlusResolver()],
+        resolvers: [
+          ElementPlusResolver(),
+          // 自动注册图标组件
+          IconsResolver({
+            enabledCollections: ['ep'],
+          })
+        ],
+        dts: resolve(__dirname, 'types/components.d.ts')
       }),
+      //图标的导入配置
+      Icons({
+        autoInstall: true,
+      }),
+
+
+      pluginExposeRenderer(name),
+      vue({}),
     ],
     resolve: {
       preserveSymlinks: true,
