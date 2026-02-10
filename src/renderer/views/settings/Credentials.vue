@@ -1,7 +1,7 @@
 <template>
   <div class="credentials-container">
     <el-table :data="tableData" border row-key="key">
-      <el-table-column label="是否当前">
+      <el-table-column label="Cur">
         <template #default="{ row }">
           <el-radio v-model="currentKey" :label="row.key" @change="() => setCurrent(row.key)"></el-radio>
         </template>

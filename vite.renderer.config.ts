@@ -11,6 +11,7 @@ import IconsResolver from 'unplugin-icons/resolver'
 
 import { resolve } from "node:path";
 import VueRouter from 'unplugin-vue-router/vite'
+import { fileURLToPath } from 'node:url';
 // https://vitejs.dev/config
 export default defineConfig((env) => {
   const forgeEnv = env as ConfigEnv<'renderer'>;
@@ -83,9 +84,11 @@ export default defineConfig((env) => {
       vue({}),
     ],
     resolve: {
-      preserveSymlinks: true,
+      // preserveSymlinks: true,
       alias: {
-        '@': resolve(__dirname, 'src/renderer/')
+        '@': resolve(__dirname, './src/renderer')
+        // '@': fileURLToPath(new URL('./src/renderer', import.meta.url))
+
       }
     },
 

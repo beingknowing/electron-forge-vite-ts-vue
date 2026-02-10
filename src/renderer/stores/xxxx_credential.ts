@@ -1,6 +1,6 @@
 
 import { defineStore } from 'pinia'
-import { CredentialItem } from 'src/orm_types'
+import { CredentialItem } from '../../../types/orm_types'
 import { reactive, ref } from 'vue'
 
 export const useCredentialStore = defineStore('credential', () => {

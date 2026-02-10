@@ -1,13 +1,14 @@
 
 import type { IpcMainInvokeEvent } from 'electron'
-import { submitTicket } from './ticket' 
+import { submitTicket } from './ticket'
 import { getUserName } from './utils'
+import { TicketType, TicketResponse } from '../../types/orm_types'
 export default {
     async onTicketSubmit(event: IpcMainInvokeEvent, data: TicketType): Promise<TicketResponse> {
         return await submitTicket(data)
     },
- 
-    async getUserName(){
+
+    async getUserName() {
         return getUserName()
     }
 }

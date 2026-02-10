@@ -4,7 +4,7 @@ import { ElMessage } from 'element-plus'
 // Explicit .vue extension ensures module resolution consistency across environments
 
 import { RouterView } from 'vue-router';
-import { TicketResponse, TicketType } from '../../orm_types';
+import { TicketResponse, TicketType } from '../../../types/orm_types';
 
 type Option = { des: string; queue: string }
 
