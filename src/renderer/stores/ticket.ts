@@ -1,6 +1,6 @@
 import { defineStore } from 'pinia'
 import { TicketResponse, TicketType } from 'src/orm_types'
-import { toRaw } from 'vue'
+import { computed, reactive, ref, toRaw } from 'vue'
 
 export const fieldLabels = {
     userName: '工单提交人',
@@ -21,66 +21,80 @@ const createEmptyValidationMessages = (): ValidationMessages => ({
 
 const requiredFields: FieldKey[] = ['userName', 'title', 'content']
 
-export const useTicketStore = defineStore('ticket', {
-    state: () => ({
-        ticket: {
-            title: '',
-            content: '',
-            queue_val: '',
-            userName: '',
-        } as TicketType,
-        validationMessages: createEmptyValidationMessages(),
-        result: undefined as TicketResponse | undefined,
-        isSubmitting: false,
-    }),
-    getters: {
-        isFormValid: (state) =>
-            requiredFields.every((field) => (state.ticket[field] ?? '').trim().length > 0),
-    },
-    actions: {
-        setTicketField(field: FieldKey, value: string) {
-            this.ticket[field] = value
-        },
-        resetValidationMessages() {
-            this.validationMessages = createEmptyValidationMessages()
-        },
-        validateTicket() {
-            this.resetValidationMessages()
-            let firstError = ''
-            requiredFields.forEach((field) => {
-                const value = (this.ticket[field] ?? '').trim()
-                if (!value) {
-                    const msg = `${fieldLabels[field]}不能为空`
-                    this.validationMessages[field] = msg
-                    if (!firstError) firstError = msg
-                }
-            })
-            return firstError
-        },
-        setResult(payload?: TicketResponse) {
-            this.result = payload
-        },
-        async submitTicket() {
-            const validationError = this.validateTicket()
-            if (validationError) {
-                return validationError
-            }
+export const useTicketStore = defineStore('ticket', () => {
+    const ticket = reactive<TicketType>({
+        title: '',
+        content: '',
+        queue_val: '',
+        userName: '',
+    } as TicketType)
+    const validationMessages = reactive<ValidationMessages>(createEmptyValidationMessages())
+    const result = ref<TicketResponse>()
+    const isSubmitting = ref(false)
 
-            try {
-                this.isSubmitting = true
-                this.setResult()
-                const payload = toRaw(this.ticket)
-                const res = await window.electron.ipcRenderer.invoke('ticket', payload)
-                this.setResult(res)
-                console.log('Submitting ticket:', payload, 'Queue:', payload.queue_val)
-            } catch (error) {
-                const message = error instanceof Error ? error.message : '提交失败，请稍后重试'
-                return message
-            } finally {
-                this.isSubmitting = false
-            }
+    const isFormValid = computed(() =>
+        requiredFields.every((field) => (ticket[field] ?? '').trim().length > 0),
+    )
 
-            return undefined
-        },
-    },
+    const resetValidationMessages = () => {
+        Object.assign(validationMessages, createEmptyValidationMessages())
+    }
+
+    const setTicketField = (field: FieldKey, value: string) => {
+        ticket[field] = value
+    }
+
+    const validateTicket = () => {
+        resetValidationMessages()
+        let firstError = ''
+        requiredFields.forEach((field) => {
+            const value = (ticket[field] ?? '').trim()
+            if (!value) {
+                const msg = `${fieldLabels[field]}不能为空`
+                validationMessages[field] = msg
+                if (!firstError) firstError = msg
+            }
+        })
+        return firstError
+    }
+
+    const setResult = (payload?: TicketResponse) => {
+        result.value = payload
+    }
+
+    const submitTicket = async () => {
+        const validationError = validateTicket()
+        if (validationError) {
+            return validationError
+        }
+
+        try {
+            isSubmitting.value = true
+            setResult()
+            const payload = toRaw(ticket)
+            const res = await window.electron.ipcRenderer.invoke('ticket', payload)
+            setResult(res)
+            console.log('Submitting ticket:', payload, 'Queue:', payload.queue_val)
+        } catch (error) {
+            const message = error instanceof Error ? error.message : '提交失败，请稍后重试'
+            return message
+        } finally {
+            isSubmitting.value = false
+        }
+
+        return undefined
+    }
+
+    return {
+        ticket,
+        validationMessages,
+        result,
+        isSubmitting,
+        isFormValid,
+        setTicketField,
+        resetValidationMessages,
+        validateTicket,
+        setResult,
+        submitTicket,
+    }
 })

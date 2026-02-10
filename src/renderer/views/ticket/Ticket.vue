@@ -3,7 +3,6 @@ import { computed, reactive } from 'vue'
 import { ElMessage } from 'element-plus'
 // Explicit .vue extension ensures module resolution consistency across environments
 
-import { RouterView, RouterLink } from 'vue-router';
 import { storeToRefs } from 'pinia'
 import { useTicketStore, fieldLabels } from '@/stores/ticket'
 
@@ -58,15 +57,8 @@ async function submitTicket() {
     }
 }
 
-
-
 </script>
 <template>
-    <RouterLink to="/settings/credentials">Settings</RouterLink>
-    <RouterLink to="/routeTest/viewOne">ViewOne</RouterLink>
-    <RouterLink to="/routeTest/viewTwo">ViewTwo</RouterLink>
-    <RouterView />
-    <hr />
     <el-card class="form-card" style="margin-top: 16px;width: 100%;height: 100%;">
         <el-text class="mx-1" type="primary">{{ information.host }}</el-text>
         <!-- user name -->
@@ -80,7 +72,7 @@ async function submitTicket() {
         <p class="field-error" v-if="validationMessages.title">{{ validationMessages.title }}</p>
 
         <!-- content -->
-        <el-input v-model="ticket.content" type="textarea" :rows="6" :placeholder="`请输入${fieldLabels.content}（支持换行）`"
+        <el-input v-model="ticket.content" type="textarea" :rows="4" :placeholder="`请输入${fieldLabels.content}（支持换行）`"
             clearable show-word-limit maxlength="1000" />
         <p class="field-error" v-if="validationMessages.content">{{ validationMessages.content }}</p>
 

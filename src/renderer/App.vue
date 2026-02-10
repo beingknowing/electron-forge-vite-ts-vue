@@ -36,13 +36,11 @@ const route = useRoute()
     </aside>
 
     <section class="display-panel">
-      <header class="display-header">
+      <!-- <header class="display-header">
         <div>
-          <p class="eyebrow">Workspace</p>
-          <h2>集中处理日常运维任务</h2>
-          <p class="lede">选择左侧任意功能，右侧展示区会即时呈现对应页面内容。</p>
+          <p class="eyebrow">Workspace</p> 
         </div>
-      </header>
+      </header> -->
 
       <div class="display-body">
         <RouterView v-slot="{ Component }">
@@ -152,8 +150,8 @@ const route = useRoute()
 
 .display-header {
   background: #ffffff;
-  padding: 28px;
-  border-radius: 28px;
+  padding: 3px;
+  border-radius: 18px;
   box-shadow: 0 25px 60px rgba(15, 23, 42, 0.1);
   color: #0f172a;
 }
