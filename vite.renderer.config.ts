@@ -84,7 +84,7 @@ export default defineConfig((env) => {
       vue({}),
     ],
     resolve: {
-      // preserveSymlinks: true,
+      preserveSymlinks: true,
       alias: {
         '@': resolve(__dirname, './src/renderer')
         // '@': fileURLToPath(new URL('./src/renderer', import.meta.url))
