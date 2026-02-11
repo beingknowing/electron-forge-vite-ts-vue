@@ -18,7 +18,7 @@ if (process.contextIsolated) {
     try {
         contextBridge.exposeInMainWorld('electron', electronAPI)
         contextBridge.exposeInMainWorld('api', api)
-        // contextBridge.exposeInMainWorld('env', process.env)
+        contextBridge.exposeInMainWorld('env', process.env)
     } catch (error) {
         console.error(error)
     }
@@ -28,5 +28,5 @@ if (process.contextIsolated) {
     // @ts-ignore (define in dts)
     window.api = api
 
-    // window.env = process.env
+    window.env = process.env
 }

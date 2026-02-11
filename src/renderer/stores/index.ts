@@ -5,9 +5,8 @@ const pinia = createPinia()
 pinia.use(createPersistedState({
     key: key => `my-app-${key}`,
     storage: window.localStorage,
-    debug: true
-
-
+    debug: true,
+    auto: true,
 }))
 
 export default pinia
