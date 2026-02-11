@@ -1,5 +1,5 @@
 import { defineStore } from 'pinia'
-import { CredentialState, CredentialItem } from '../../../types/orm_types'
+import { CredentialState, CredentialItem } from '../../../../types/orm_types'
 
 
 export const useCredentialStore = defineStore('credential', {

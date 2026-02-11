@@ -39,7 +39,7 @@
 </template>
 <script setup lang="ts">
 import { storeToRefs } from 'pinia'
-import { useCredentialStore } from '@/stores/credentials'
+import { useCredentialStore } from '@stores/credentials'
 
 const store = useCredentialStore()
 const { tableData, currentKey } = storeToRefs(store)

@@ -4,7 +4,7 @@ import { ElMessage } from 'element-plus'
 // Explicit .vue extension ensures module resolution consistency across environments
 
 import { storeToRefs } from 'pinia'
-import { useTicketStore, fieldLabels } from '@/stores/ticket'
+import { useTicketStore, fieldLabels } from '@stores/ticket'
 
 type Option = { des: string; queue: string }
 
