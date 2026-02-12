@@ -35,8 +35,8 @@ export async function getToken() {
     });
 }
 
-import { getUserName } from './utils'
-import { ClientCredential, TicketType, TicketResponse } from '../../types/orm_types';
+import { getUserName } from '../utils'
+import { ClientCredential, TicketType, TicketResponse } from '../../../types/orm_types';
 export async function submitTicket(userInput: TicketType) {
 
   let client_credentials = await getToken()

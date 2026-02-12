@@ -169,14 +169,22 @@ app.on('browser-window-blur', () => {
 app.on('browser-window-focus', () => {
   console.log('app browser-window-focus');
 });
-import ticketController from "./ticketController";
+
+import handlers from "./handlers/index";
+
+type HandlerKey = keyof typeof handlers;
+
+export const registerHandlerForIpcMain = () => {
+  const entries = Object.entries(handlers) as [HandlerKey, typeof handlers[HandlerKey]][];
+  for (const [key, handler] of entries) {
+    console.log("🚀 ~ registerHandlerForIpcMain ~ key:", key)
+    ipcMain.handle(key, (event, ...params) => handler(event, ...params));
+  }
+  ipcMain.handle("getIpcHandlerForPreload", () => Object.keys(handlers));
+};
+
 app.whenReady().then(_v => {
   console.log("🚀 ~ app.whenReady() process.env.sn_host:", process.env.sn_host)
 
-  ipcMain.handle('ticket', ticketController.onTicketSubmit)
-
-  // 获取 Windows 域账号并通过 IPC 提供给 renderer
-  ipcMain.handle('get-domain-user', ticketController.getUserName);
-
-  // ipcMain.handle()
+  registerHandlerForIpcMain();
 }) 
