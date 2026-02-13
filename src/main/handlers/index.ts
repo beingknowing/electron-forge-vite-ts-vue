@@ -1,7 +1,7 @@
 import ticket from "./ticketHandler";
-
+import credential from "./credentialHandler";
 const handlers = {
-    ...ticket
+    ...ticket, ...credential
 } as const;
 
 export type IpcHandlerMap = typeof handlers;

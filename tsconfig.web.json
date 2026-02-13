@@ -4,7 +4,7 @@
     "**/*.d.ts",
     "src/renderer/**/*.vue",
     "src/renderer/**/*.ts",
-    "src/preload/*.ts",
+    "**/*.ts",
   ],
   "compilerOptions": {
     "moduleResolution": "bundler",
@@ -13,7 +13,7 @@
     ],
     "composite": true,
     "baseUrl": "./",
-    "skipLibCheck": true,
+    // "skipLibCheck": true,
   },
   "exclude": [
     "**/dist",

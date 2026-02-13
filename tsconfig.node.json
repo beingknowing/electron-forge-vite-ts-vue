@@ -4,7 +4,7 @@
     "**/*.d.ts",
     "src/main/**/*",
     "src/preload/**/*",
-    "*.ts"
+    "**/*.ts",
   ],
   "compilerOptions": {
     "composite": true
@@ -17,6 +17,7 @@
     "**/build",
     "cache",
     "**/.vite/",
-    "**/node_modules"
+    "**/node_modules",
+    "./src/renderer",
   ],
 }
