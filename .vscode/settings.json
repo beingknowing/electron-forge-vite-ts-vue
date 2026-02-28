@@ -33,4 +33,7 @@
     "git.decorations.enabled": true,
     "gitlens.views.contributors.reveal": true,
     "gitlens.views.contributors.files.compact": true,
+    "i18n-ally.localesPaths": [
+        "out/electron-forge-vite-ts-vue-win32-x64/locales"
+    ],
 }
