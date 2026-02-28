@@ -36,4 +36,16 @@
     "i18n-ally.localesPaths": [
         "out/electron-forge-vite-ts-vue-win32-x64/locales"
     ],
+    "git.blame.editorDecoration.enabled": false,
+    "git.blame.statusBarItem.enabled": false,
+    "gitlens.blame.heatmap.enabled": true,
+    "gitlens.blame.compact": true,
+    "gitlens.blame.highlight.enabled": true,
+    "gitlens.blame.separateLines": true,
+    "gitlens.currentLine.enabled": false,
+    "gitlens.plusFeatures.enabled": false,
+    "gitlens.virtualRepositories.enabled": false,
+    "gitlens.currentLine.pullRequests.enabled": false,
+    "gitlens.currentLine.scrollable": false,
+    "gitlens.codeLens.enabled": false,
 }
