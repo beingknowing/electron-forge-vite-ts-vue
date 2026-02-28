@@ -1,0 +1,51 @@
+{
+    "typescript.tsserver.maxTsServerMemory": 8192, // 限制内存为 8GB
+    "typescript.tsserver.watchOptions": {
+        "watchFile": "useFsEvents", // 使用系统文件监听（Mac/Windows）
+        "watchDirectory": "useFsEvents"
+    },
+    "typescript.tsserver.experimental.enableProjectDiagnostics": true, // 禁用全项目诊断
+    "typescript.workspaceSymbols.scope": "currentProject",
+    "debug.showVariableTypes": true,
+    "github.copilot.chat.languageContext.fix.typescript.enabled": true,
+    "github.copilot.chat.languageContext.inline.typescript.enabled": true,
+    "docwriter.progress.trackTypes": true,
+    "files.exclude": {
+        "**/.git": false,
+        "**/.svn": false,
+        "**/.hg": false,
+        "**/.DS_Store": false,
+        "**/Thumbs.db": false
+    },
+    "explorerExclude.backup": {
+        "**/.git": true,
+        "**/.svn": true,
+        "**/.hg": true,
+        "**/.DS_Store": true,
+        "**/Thumbs.db": true
+    },
+    "gitlens.views.repositories.showContributors": false,
+    "gitlens.views.showComparisonContributors": false,
+    "gitlens.views.contributors.pullRequests.enabled": false,
+    "gitlens.views.contributors.pullRequests.showForCommits": false,
+    "gitlens.views.contributors.avatars": true,
+    "gitlens.views.workspaces.showContributors": false,
+    "git.decorations.enabled": true,
+    "gitlens.views.contributors.reveal": true,
+    "gitlens.views.contributors.files.compact": true,
+    "i18n-ally.localesPaths": [
+        "out/electron-forge-vite-ts-vue-win32-x64/locales"
+    ],
+    "git.blame.editorDecoration.enabled": false,
+    "git.blame.statusBarItem.enabled": false,
+    "gitlens.blame.heatmap.enabled": true,
+    "gitlens.blame.compact": true,
+    "gitlens.blame.highlight.enabled": true,
+    "gitlens.blame.separateLines": true,
+    "gitlens.currentLine.enabled": false,
+    "gitlens.plusFeatures.enabled": false,
+    "gitlens.virtualRepositories.enabled": false,
+    "gitlens.currentLine.pullRequests.enabled": false,
+    "gitlens.currentLine.scrollable": false,
+    "gitlens.codeLens.enabled": false,
+}

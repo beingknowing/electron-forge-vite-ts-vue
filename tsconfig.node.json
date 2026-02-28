@@ -1,0 +1,23 @@
+{
+  "extends": "@electron-toolkit/tsconfig/tsconfig.node.json",
+  "include": [
+    "**/*.d.ts",
+    "src/main/**/*",
+    "src/preload/**/*",
+    "**/*.ts",
+  ],
+  "compilerOptions": {
+    "composite": true
+  },
+  "exclude": [
+    "**/dist",
+    "**/build",
+    ".vscode",
+    "**/.git",
+    "**/build",
+    "cache",
+    "**/.vite/",
+    "**/node_modules",
+    "./src/renderer",
+  ],
+}

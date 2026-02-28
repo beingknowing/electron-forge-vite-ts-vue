@@ -9,15 +9,16 @@ export default defineConfig((env) => {
   const define = getBuildDefine(forgeEnv);
   const config: UserConfig = {
     build: {
-      sourcemap: "inline", // 调试，必须开启
+      outDir: '.vite/build/',
+      sourcemap: 'inline',
       lib: {
         entry: forgeConfigSelf.entry!,
         fileName: () => '[name].js',
         formats: ['cjs'],
       },
-      rollupOptions: {
-        external,
-      },
+      // rollupOptions: {
+      //   external,
+      // },
     },
     plugins: [pluginHotRestart('restart')],
     define,

@@ -8,9 +8,10 @@ export default defineConfig((env) => {
   const { forgeConfigSelf } = forgeEnv;
   const config: UserConfig = {
     build: {
+      outDir: '.vite/build/preload',
       sourcemap: "inline", // 调试，必须开启
       rollupOptions: {
-        external,
+        // external: ['electron'],
         // Preload scripts may contain Web assets, so use the `build.rollupOptions.input` instead `build.lib.entry`.
         input: forgeConfigSelf.entry!,
         output: {
