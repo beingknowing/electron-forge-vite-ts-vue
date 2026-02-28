@@ -2,7 +2,7 @@
   "compilerOptions": {
     "strict": true,
     "forceConsistentCasingInFileNames": true,
-    // "skipLibCheck": true,
+    "skipLibCheck": true,
     "types": [],
     "typeRoots": [
       // "./node_modules/@types",
